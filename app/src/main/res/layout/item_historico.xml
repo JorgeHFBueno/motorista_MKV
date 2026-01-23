@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edittext_background"
+    android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tvTipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:text="Tipo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Data"
+            app:layout_constraintStart_toStartOf="@+id/tvTipo"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipo" />
+
+        <TextView
+            android:id="@+id/tvPlaca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Placa"
+            app:layout_constraintStart_toStartOf="@+id/tvMotorista"
+            app:layout_constraintTop_toBottomOf="@+id/tvMotorista" />
+
+        <TextView
+            android:id="@+id/tvMotorista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Motorista"
+            app:layout_constraintStart_toStartOf="@+id/tvData"
+            app:layout_constraintTop_toBottomOf="@+id/tvData" />
+
+        <TextView
+            android:id="@+id/tvMotivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Motivo"
+            app:layout_constraintStart_toStartOf="@+id/tvDestino"
+            app:layout_constraintTop_toBottomOf="@+id/tvDestino" />
+
+        <TextView
+            android:id="@+id/tvDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Destino (somente em Saídas)"
+            app:layout_constraintStart_toStartOf="@+id/tvPlaca"
+            app:layout_constraintTop_toBottomOf="@+id/tvPlaca" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

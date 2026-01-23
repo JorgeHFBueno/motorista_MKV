@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Litragem Inicial -->
+    <TextView
+        android:id="@+id/popupliLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="Montante inicial:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/popupliTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/popupliLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/popupliLabelTextView" />
+
+    <!-- Campo Extra
+    <TextView
+        android:id="@+id/MotivoLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motivo: "
+        android:textSize="20sp"
+        android:textColor="@color/azul_escuro"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/popupliTextView" />
+    <TextView
+        android:id="@+id/popupMotivoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@id/MotivoLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/MotivoLabelTextView"
+        app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

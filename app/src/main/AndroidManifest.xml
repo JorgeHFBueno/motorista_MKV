@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permissões necessárias -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Motorista"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Motorista_MKV"
+        tools:targetApi="31">
+        <activity
+            android:name=".AssSignatureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AssActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota_mkii.FrotaActivity"
+            android:exported="false"
+            android:label="" />
+        <activity
+            android:name=".adm.notificacoes.ConflitoMontanteActivity"
+            android:exported="false" /> <!-- INICIO -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".motorista.ArrivalActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".motorista.DepartureActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdmActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".motorista.HistoricoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" /> <!-- ADM -->
+        <activity
+            android:name=".adm.combustivel.ConflitoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".adm.combustivel.FuelActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".adm.combustivel.CombustivelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.FrotaActivityOLD"
+            android:exported="false" />
+        <activity
+            android:name=".adm.notificacoes.DetalheChamadoActivity"
+            android:exported="false" /> <!-- FROTA -->
+        <activity
+            android:name=".frota.HistoricoPlacaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.PlacasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.EditDepActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.EditArrActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.TruckArrActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.TruckDepActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.TruckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frota.EditActivity"
+            android:exported="false" /> <!-- FUEL -->
+        <activity
+            android:name=".adm.combustivel.EditCombustivelActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".adm.notificacoes.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

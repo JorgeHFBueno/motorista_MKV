@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".adm.combustivel.EditCombustivelActivity">
+
+    <TextView
+        android:id="@+id/tvTitulo8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edição do Abastecimento"
+        android:textColor="@color/azul_escuro"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backFuelButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/backFuelButton" />
+
+    <Button
+        android:id="@+id/backFuelButton"
+        android:layout_width="110dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        android:background="@color/azul_claroFundo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backFuelButton">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textPlaca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecionar placa"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkBoxExtra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Máquinas"
+                app:layout_constraintBottom_toBottomOf="@+id/textPlaca"
+                app:layout_constraintStart_toEndOf="@+id/textPlaca"
+                app:layout_constraintTop_toTopOf="@+id/textPlaca" />
+
+            <AutoCompleteTextView
+                android:id="@+id/editPlacaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_background"
+                android:hint="AAA-0000"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textPlaca" />
+
+            <CheckBox
+                android:id="@+id/checkBoxkm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="KM"
+                android:textColor="@color/azul_escuro"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editPlacaEditText" />
+
+            <CheckBox
+                android:id="@+id/checkBoxGalao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Galão"
+                android:textColor="@color/azul_escuro"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/checkBoxkm"
+                app:layout_constraintTop_toTopOf="@+id/checkBoxkm" />
+
+            <CheckBox
+                android:id="@+id/checkBoxHNF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Sem Odõmetro"
+                android:textColor="@color/azul_escuro"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/checkBoxGalao"
+                app:layout_constraintTop_toTopOf="@+id/checkBoxGalao" />
+
+            <EditText
+                android:id="@+id/kmEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="KM"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxkm"/>
+
+            <TextView
+                android:id="@+id/textParaQuem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Motorista/Operador:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kmEditText"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/paraQuemEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Nome"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/motivoEditText"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textParaQuem"/>
+
+            <TextView
+                android:id="@+id/textMotivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Motivo:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paraQuemEditText"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/motivoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Motivo"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textMotivo"/>
+
+            <TextView
+                android:id="@+id/textlocal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Local:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motivoEditText"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/localEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Local"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textlocal" />
+
+            <TextView
+                android:id="@+id/motoristaText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Frentista:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/localEditText"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/motoristaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Nome"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motoristaText"/>
+
+            <TextView
+                android:id="@+id/observacaoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Observação:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motoristaEditText"/>
+
+            <EditText
+                android:id="@+id/observacaoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Obs"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/observacaoText"/>
+
+            <TextView
+                android:id="@+id/dataText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Data:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/observacaoEditText"/>
+            <EditText
+                android:id="@+id/dataEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="DATA"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dataText"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_claroFundo"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <TextView
+                android:id="@+id/textLInicial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Montante Inicial:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <EditText
+                android:id="@+id/liEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="LI"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textLInicial"/>
+
+            <TextView
+                android:id="@+id/textLAbastecidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Litros Abastecidos:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/liEditText"/>
+
+            <EditText
+                android:id="@+id/qaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Litros"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textLAbastecidos"/>
+
+            <TextView
+                android:id="@+id/textLFinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Montante Final:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qaEditText" />
+
+            <AutoCompleteTextView
+                android:id="@+id/lfAutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="LF"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textLFinal"/>
+
+            <TextView
+                android:id="@+id/textArla"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Arla:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lfAutoCompleteTextView" />
+
+            <EditText
+                android:id="@+id/EditTextArla"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:hint="Litros"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textArla"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="220dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        android:text="Salvar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/successOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/successGif"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/thumbs_up" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

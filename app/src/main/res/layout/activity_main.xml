@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/truck_bg"
+    tools:context=".MainActivity">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="220dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_vetor" />
+
+    <!-- Texto de boas-vindas -->
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Bem-vindo!"
+        android:textColor="@color/azul_escuro"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/versionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/azul_escuro"
+        android:text=" Nova Versão Disponivel! "
+        android:textColor="#FF1200"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/departureButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
+
+    <Button
+        android:id="@+id/departureButton"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/cs41nd0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
+
+    <Button
+        android:id="@+id/feedbackButton"
+        android:layout_width="61dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/feedback"
+        app:layout_constraintBottom_toBottomOf="@+id/welcomeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcomeTextView" />
+
+    <Button
+        android:id="@+id/arrivalButton"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/chegando"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/departureButton" />
+
+    <Button
+        android:id="@+id/fuelButton"
+        android:visibility="gone"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/fuel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalButton" />
+
+    <!-- Corrigir -->
+    <Button
+        android:id="@+id/admButton"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/administracao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalButton" />
+
+    <Button
+        android:id="@+id/histButton"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="145dp"
+        android:background="@drawable/hist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalButton" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="270dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/sair_conta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/successOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/successGif"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/thumbs_up" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

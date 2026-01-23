@@ -1,0 +1,1236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="options_array_motoristas">
+        <!-- Motoristas -->
+        <item>AMILTON PINHEIRO FORTES</item>
+        <item>ANTONIO CENAIR DOS SANTOS</item>
+        <item>BRAYAN MARTINS DE LIMA</item>
+        <item>CRISTIANO DOMINGUES BUENO</item>
+        <item>DIEGO RAMON GONÇALVES</item>
+        <item>DILAMAR FABIANO ZANATTA</item>
+        <item>EDERSON BOLICO TASSO</item>
+        <item>ELISEU DOS SANTOS SOUZA</item>
+        <item>FERNANDO DOS SANTOS DE OLIVEIRA</item>
+        <item>FRANCISCO ESTULANO BERNARDO</item>
+        <item>GILBERTO JOSE ROSS</item>
+        <item>ISABEL CRISTINA KRUGER DE VARGAS</item>
+        <item>JEFERSON DE OLIVEIRA MORAES</item>
+        <item>JOAO JOEL DA SILVEIRA S</item>
+        <item>JORGE LUIZ DUARTE PEREIRA</item>
+        <item>LEDUR</item>
+        <item>LOIDEMAR TONIETTO TAIS</item>
+        <item>MATEUS DA SILVA BUENO</item>
+        <item>PAULO RICARDO RODRIGUES BUENO</item>
+        <item>RONIVAN DA ROSA</item>
+        <item>VALDENEI BURGO DE OLIVEIRA</item>
+        <item>VANDERLEI BURGO DE OLIVEIRA</item>
+        <item>WELINTON FERNANDO RODRIGUES</item>
+    </string-array>
+
+    <string-array name="options_array_motivos">
+        <!-- Motivos para a saida-->
+        <item>Buscar Motorista</item>
+        <item>Deslocamento para a fabrica</item>
+        <item>Deslocamento para obra</item>
+        <item>Manutenção do Veículo</item>
+        <item>Missão Cidade</item>
+        <item>Prestação de Socorro</item>
+        <item>Transporte de Funcionarios</item>
+        <item>Transporte de Material</item>
+        <item>Transporte de Peças</item>
+        <item>Uso Fábrica</item>
+    </string-array>
+
+    <string-array name="options_array_destino">
+        <!-- Cities in Rio Grande do Sul -->
+        <item>Fábrica</item>
+        <item>Aceguá - RS</item>
+<item>Água Santa - RS</item>
+<item>Agudo - RS</item>
+<item>Ajuricaba - RS</item>
+<item>Alecrim - RS</item>
+<item>Alegrete - RS</item>
+<item>Alegria - RS</item>
+<item>Almirante Tamandaré do Sul - RS</item>
+<item>Alpestre - RS</item>
+<item>Alto Alegre - RS</item>
+<item>Alto Feliz - RS</item>
+<item>Alvorada - RS</item>
+<item>Amaral Ferrador - RS</item>
+<item>Ametista do Sul - RS</item>
+<item>André da Rocha - RS</item>
+<item>Anta Gorda - RS</item>
+<item>Antônio Prado - RS</item>
+<item>Arambaré - RS</item>
+<item>Araricá - RS</item>
+<item>Aratiba - RS</item>
+<item>Arroio do Meio - RS</item>
+<item>Arroio do Padre - RS</item>
+<item>Arroio do Sal - RS</item>
+<item>Arroio do Tigre - RS</item>
+<item>Arroio dos Ratos - RS</item>
+<item>Arroio Grande - RS</item>
+<item>Arvorezinha - RS</item>
+<item>Augusto Pestana - RS</item>
+<item>Áurea - RS</item>
+<item>Bagé - RS</item>
+<item>Balneário Pinhal - RS</item>
+<item>Barão - RS</item>
+<item>Barão de Cotegipe - RS</item>
+<item>Barão do Triunfo - RS</item>
+<item>Barra do Guarita - RS</item>
+<item>Barra do Quaraí - RS</item>
+<item>Barra do Ribeiro - RS</item>
+<item>Barra do Rio Azul - RS</item>
+<item>Barra Funda - RS</item>
+<item>Barracão - RS</item>
+<item>Barros Cassal - RS</item>
+<item>Benjamin Constant do Sul - RS</item>
+<item>Bento Gonçalves - RS</item>
+<item>Boa Vista das Missões - RS</item>
+<item>Boa Vista do Buricá - RS</item>
+<item>Boa Vista do Cadeado - RS</item>
+<item>Boa Vista do Incra - RS</item>
+<item>Boa Vista do Sul - RS</item>
+<item>Bom Jesus - RS</item>
+<item>Bom Princípio - RS</item>
+<item>Bom Progresso - RS</item>
+<item>Bom Retiro do Sul - RS</item>
+<item>Boqueirão do Leão - RS</item>
+<item>Bossoroca - RS</item>
+<item>Bozano - RS</item>
+<item>Braga - RS</item>
+<item>Brochier - RS</item>
+<item>Butiá - RS</item>
+<item>Caçapava do Sul - RS</item>
+<item>Cacequi - RS</item>
+<item>Cachoeira do Sul - RS</item>
+<item>Cachoeirinha - RS</item>
+<item>Cacique Doble - RS</item>
+<item>Caibaté - RS</item>
+<item>Caiçara - RS</item>
+<item>Camaquã - RS</item>
+<item>Camargo - RS</item>
+<item>Cambará do Sul - RS</item>
+<item>Campestre da Serra - RS</item>
+<item>Campina das Missões - RS</item>
+<item>Campinas do Sul - RS</item>
+<item>Campo Bom - RS</item>
+<item>Campo Novo - RS</item>
+<item>Campos Borges - RS</item>
+<item>Candelária - RS</item>
+<item>Cândido Godói - RS</item>
+<item>Candiota - RS</item>
+<item>Canela - RS</item>
+<item>Canguçu - RS</item>
+<item>Canoas - RS</item>
+<item>Canudos do Vale - RS</item>
+<item>Capão Bonito do Sul - RS</item>
+<item>Capão da Canoa - RS</item>
+<item>Capão do Cipó - RS</item>
+<item>Capão do Leão - RS</item>
+<item>Capela de Santana - RS</item>
+<item>Capitão - RS</item>
+<item>Capivari do Sul - RS</item>
+<item>Caraá - RS</item>
+<item>Carazinho - RS</item>
+<item>Carlos Barbosa - RS</item>
+<item>Carlos Gomes - RS</item>
+<item>Casca - RS</item>
+<item>Caseiros - RS</item>
+<item>Catuípe - RS</item>
+<item>Caxias do Sul - RS</item>
+<item>Centenário - RS</item>
+<item>Cerrito - RS</item>
+<item>Cerro Branco - RS</item>
+<item>Cerro Grande - RS</item>
+<item>Cerro Grande do Sul - RS</item>
+<item>Cerro Largo - RS</item>
+<item>Chapada - RS</item>
+<item>Charqueadas - RS</item>
+<item>Charrua - RS</item>
+<item>Chiapetta - RS</item>
+<item>Chuí - RS</item>
+<item>Chuvisca - RS</item>
+<item>Cidreira - RS</item>
+<item>Ciríaco - RS</item>
+<item>Colinas - RS</item>
+<item>Colorado - RS</item>
+<item>Condor - RS</item>
+<item>Constantina - RS</item>
+<item>Coqueiro Baixo - RS</item>
+<item>Coqueiros do Sul - RS</item>
+<item>Coronel Barros - RS</item>
+<item>Coronel Bicaco - RS</item>
+<item>Coronel Pilar - RS</item>
+<item>Cotiporã - RS</item>
+<item>Coxilha - RS</item>
+<item>Crissiumal - RS</item>
+<item>Cristal - RS</item>
+<item>Cristal do Sul - RS</item>
+<item>Cruz Alta - RS</item>
+<item>Cruzaltense - RS</item>
+<item>Cruzeiro do Sul - RS</item>
+<item>David Canabarro - RS</item>
+<item>Derrubadas - RS</item>
+<item>Dezesseis de Novembro - RS</item>
+<item>Dilermando de Aguiar - RS</item>
+<item>Dois Irmãos - RS</item>
+<item>Dois Irmãos das Missões - RS</item>
+<item>Dois Lajeados - RS</item>
+<item>Dom Feliciano - RS</item>
+<item>Dom Pedrito - RS</item>
+<item>Dom Pedro de Alcântara - RS</item>
+<item>Dona Francisca - RS</item>
+<item>Doutor Maurício Cardoso - RS</item>
+<item>Doutor Ricardo - RS</item>
+<item>Eldorado do Sul - RS</item>
+<item>Encantado - RS</item>
+<item>Encruzilhada do Sul - RS</item>
+<item>Engenho Velho - RS</item>
+<item>Entre-Ijuís - RS</item>
+<item>Entre Rios do Sul - RS</item>
+<item>Erebango - RS</item>
+<item>Erechim - RS</item>
+<item>Ernestina - RS</item>
+<item>Erval Grande - RS</item>
+<item>Erval Seco - RS</item>
+<item>Esmeralda - RS</item>
+<item>Esperança do Sul - RS</item>
+<item>Espumoso - RS</item>
+<item>Estação - RS</item>
+<item>Estância Velha - RS</item>
+<item>Esteio - RS</item>
+<item>Estrela - RS</item>
+<item>Estrela Velha - RS</item>
+<item>Eugênio de Castro - RS</item>
+<item>Fagundes Varela - RS</item>
+<item>Farroupilha - RS</item>
+<item>Faxinal do Soturno - RS</item>
+<item>Faxinalzinho - RS</item>
+<item>Fazenda Vilanova - RS</item>
+<item>Feliz - RS</item>
+<item>Flores da Cunha - RS</item>
+<item>Floriano Peixoto - RS</item>
+<item>Fontoura Xavier - RS</item>
+<item>Formigueiro - RS</item>
+<item>Forquetinha - RS</item>
+<item>Fortaleza dos Valos - RS</item>
+<item>Frederico Westphalen - RS</item>
+<item>Garibaldi - RS</item>
+<item>Garruchos - RS</item>
+<item>Gaurama - RS</item>
+<item>General Câmara - RS</item>
+<item>Gentil - RS</item>
+<item>Getúlio Vargas - RS</item>
+<item>Giruá - RS</item>
+<item>Glorinha - RS</item>
+<item>Gramado - RS</item>
+<item>Gramado dos Loureiros - RS</item>
+<item>Gramado Xavier - RS</item>
+<item>Gravataí - RS</item>
+<item>Guabiju - RS</item>
+<item>Guaíba - RS</item>
+<item>Guaporé - RS</item>
+<item>Guarani das Missões - RS</item>
+<item>Harmonia - RS</item>
+<item>Herval - RS</item>
+<item>Herveiras - RS</item>
+<item>Horizontina - RS</item>
+<item>Hulha Negra - RS</item>
+<item>Humaitá - RS</item>
+<item>Ibarama - RS</item>
+<item>Ibiaçá - RS</item>
+<item>Ibiraiaras - RS</item>
+<item>Ibirapuitã - RS</item>
+<item>Ibirubá - RS</item>
+<item>Igrejinha - RS</item>
+<item>Ijuí - RS</item>
+<item>Ilópolis - RS</item>
+<item>Imbé - RS</item>
+<item>Imigrante - RS</item>
+<item>Independência - RS</item>
+<item>Inhacorá - RS</item>
+<item>Ipê - RS</item>
+<item>Ipiranga do Sul - RS</item>
+<item>Iraí - RS</item>
+<item>Itaara - RS</item>
+<item>Itacurubi - RS</item>
+<item>Itapuca - RS</item>
+<item>Itaqui - RS</item>
+<item>Itati - RS</item>
+<item>Itatiba do Sul - RS</item>
+<item>Ivorá - RS</item>
+<item>Ivoti - RS</item>
+<item>Jaboticaba - RS</item>
+<item>Jacuizinho - RS</item>
+<item>Jacutinga - RS</item>
+<item>Jaguarão - RS</item>
+<item>Jaguari - RS</item>
+<item>Jaquirana - RS</item>
+<item>Jari - RS</item>
+<item>Jóia - RS</item>
+<item>Júlio de Castilhos - RS</item>
+<item>Lagoa Bonita do Sul - RS</item>
+<item>Lagoa dos Três Cantos - RS</item>
+<item>Lagoa Vermelha - RS</item>
+<item>Lagoão - RS</item>
+<item>Lajeado - RS</item>
+<item>Lajeado do Bugre - RS</item>
+<item>Lavras do Sul - RS</item>
+<item>Liberato Salzano - RS</item>
+<item>Lindolfo Collor - RS</item>
+<item>Linha Nova - RS</item>
+<item>Maçambará - RS</item>
+<item>Machadinho - RS</item>
+<item>Mampituba - RS</item>
+<item>Manoel Viana - RS</item>
+<item>Maquiné - RS</item>
+<item>Maratá - RS</item>
+<item>Marau - RS</item>
+<item>Marcelino Ramos - RS</item>
+<item>Mariana Pimentel - RS</item>
+<item>Mariano Moro - RS</item>
+<item>Marques de Souza - RS</item>
+<item>Mata - RS</item>
+<item>Mato Castelhano - RS</item>
+<item>Mato Leitão - RS</item>
+<item>Mato Queimado - RS</item>
+<item>Maximiliano de Almeida - RS</item>
+<item>Minas do Leão - RS</item>
+<item>Miraguaí - RS</item>
+<item>Montauri - RS</item>
+<item>Monte Alegre dos Campos - RS</item>
+<item>Monte Belo do Sul - RS</item>
+<item>Montenegro - RS</item>
+<item>Mormaço - RS</item>
+<item>Morrinhos do Sul - RS</item>
+<item>Morro Redondo - RS</item>
+<item>Morro Reuter - RS</item>
+<item>Mostardas - RS</item>
+<item>Muçum - RS</item>
+<item>Muitos Capões - RS</item>
+<item>Muliterno - RS</item>
+<item>Não-Me-Toque - RS</item>
+<item>Nicolau Vergueiro - RS</item>
+<item>Nonoai - RS</item>
+<item>Nova Alvorada - RS</item>
+<item>Nova Araçá - RS</item>
+<item>Nova Bassano - RS</item>
+<item>Nova Boa Vista - RS</item>
+<item>Nova Bréscia - RS</item>
+<item>Nova Candelária - RS</item>
+<item>Nova Esperança do Sul - RS</item>
+<item>Nova Hartz - RS</item>
+<item>Nova Pádua - RS</item>
+<item>Nova Palma - RS</item>
+<item>Nova Petrópolis - RS</item>
+<item>Nova Prata - RS</item>
+<item>Nova Ramada - RS</item>
+<item>Nova Roma do Sul - RS</item>
+<item>Nova Santa Rita - RS</item>
+<item>Novo Barreiro - RS</item>
+<item>Novo Cabrais - RS</item>
+<item>Novo Hamburgo - RS</item>
+<item>Novo Machado - RS</item>
+<item>Novo Tiradentes - RS</item>
+<item>Osório - RS</item>
+<item>Paim Filho - RS</item>
+<item>Palmares do Sul - RS</item>
+<item>Palmeira das Missões - RS</item>
+<item>Palmitinho - RS</item>
+<item>Panambi - RS</item>
+<item>Pantano Grande - RS</item>
+<item>Paraí - RS</item>
+<item>Paraíso do Sul - RS</item>
+<item>Pareci Novo - RS</item>
+<item>Parobé - RS</item>
+<item>Passa Sete - RS</item>
+<item>Passo do Sobrado - RS</item>
+<item>Passo Fundo - RS</item>
+<item>Paulo Bento - RS</item>
+<item>Paverama - RS</item>
+<item>Pedras Altas - RS</item>
+<item>Pedro Osório - RS</item>
+<item>Pejuçara - RS</item>
+<item>Pelotas - RS</item>
+<item>Picada Café - RS</item>
+<item>Pinhal - RS</item>
+<item>Pinhal da Serra - RS</item>
+<item>Pinhal Grande - RS</item>
+<item>Pinheirinho do Vale - RS</item>
+<item>Pinheiro Machado - RS</item>
+<item>Pinto Bandeira - RS</item>
+<item>Pirapó - RS</item>
+<item>Piratini - RS</item>
+<item>Planalto - RS</item>
+<item>Poço das Antas - RS</item>
+<item>Pontão - RS</item>
+<item>Ponte Preta - RS</item>
+<item>Portão - RS</item>
+<item>Porto Alegre - RS</item>
+<item>Porto Lucena - RS</item>
+<item>Porto Mauá - RS</item>
+<item>Porto Vera Cruz - RS</item>
+<item>Porto Xavier - RS</item>
+<item>Pouso Novo - RS</item>
+<item>Presidente Lucena - RS</item>
+<item>Progresso - RS</item>
+<item>Protásio Alves - RS</item>
+<item>Putinga - RS</item>
+<item>Quaraí - RS</item>
+<item>Quatro Irmãos - RS</item>
+<item>Quevedos - RS</item>
+<item>Quinze de Novembro - RS</item>
+<item>Redentora - RS</item>
+<item>Relvado - RS</item>
+<item>Restinga Seca - RS</item>
+<item>Rio dos Índios - RS</item>
+<item>Rio Grande - RS</item>
+<item>Rio Pardo - RS</item>
+<item>Riozinho - RS</item>
+<item>Roca Sales - RS</item>
+<item>Rodeio Bonito - RS</item>
+<item>Rolador - RS</item>
+<item>Rolante - RS</item>
+<item>Ronda Alta - RS</item>
+<item>Rondinha - RS</item>
+<item>Roque Gonzales - RS</item>
+<item>Rosário do Sul - RS</item>
+<item>Sagrada Família - RS</item>
+<item>Saúde - RS</item>
+<item>Salto do Jacuí - RS</item>
+<item>Salvador das Missões - RS</item>
+<item>Salvador do Sul - RS</item>
+<item>Sananduva - RS</item>
+<item>Santa Bárbara do Sul - RS</item>
+<item>Santa Cecília do Sul - RS</item>
+<item>Santa Clara do Sul - RS</item>
+<item>Santa Cruz do Sul - RS</item>
+<item>Santa Margarida do Sul - RS</item>
+<item>Santa Maria - RS</item>
+<item>Santa Maria do Herval - RS</item>
+<item>Santa Rosa - RS</item>
+<item>Santa Tereza - RS</item>
+<item>Santa Vitória do Palmar - RS</item>
+<item>Santana da Boa Vista - RS</item>
+<item>Santana do Livramento - RS</item>
+<item>Santiago - RS</item>
+<item>Santo Ângelo - RS</item>
+<item>Santo Antônio da Patrulha - RS</item>
+<item>Santo Antônio das Missões - RS</item>
+<item>Santo Antônio do Palma - RS</item>
+<item>Santo Antônio do Planalto - RS</item>
+<item>Santo Augusto - RS</item>
+<item>Santo Cristo - RS</item>
+<item>Santo Expedito do Sul - RS</item>
+<item>São Borja - RS</item>
+<item>São Domingos do Sul - RS</item>
+<item>São Francisco de Assis - RS</item>
+<item>São Francisco de Paula - RS</item>
+<item>São Gabriel - RS</item>
+<item>São Jerônimo - RS</item>
+<item>São João da Urtiga - RS</item>
+<item>São João do Polêsine - RS</item>
+<item>São Jorge - RS</item>
+<item>São José das Missões - RS</item>
+<item>São José do Herval - RS</item>
+<item>São José do Hortêncio - RS</item>
+<item>São José do Inhacorá - RS</item>
+<item>São José do Norte - RS</item>
+<item>São José do Ouro - RS</item>
+<item>São José dos Ausentes - RS</item>
+<item>São Leopoldo - RS</item>
+<item>São Lourenço do Sul - RS</item>
+<item>São Luiz Gonzaga - RS</item>
+<item>São Marcos - RS</item>
+<item>São Martinho - RS</item>
+<item>São Martinho da Serra - RS</item>
+<item>São Miguel das Missões - RS</item>
+<item>São Nicolau - RS</item>
+<item>São Paulo das Missões - RS</item>
+<item>São Pedro da Serra - RS</item>
+<item>São Pedro das Missões - RS</item>
+<item>São Pedro do Butiá - RS</item>
+<item>São Pedro do Sul - RS</item>
+<item>São Sebastião do Caí - RS</item>
+<item>São Sepé - RS</item>
+<item>São Valentim - RS</item>
+<item>São Valentim do Sul - RS</item>
+<item>São Valério do Sul - RS</item>
+<item>São Vendelino - RS</item>
+<item>São Vicente do Sul - RS</item>
+<item>Sapiranga - RS</item>
+<item>Sapucaia do Sul - RS</item>
+<item>Sarandi - RS</item>
+<item>Seberi - RS</item>
+<item>Sede Nova - RS</item>
+<item>Segredo - RS</item>
+<item>Selbach - RS</item>
+<item>Senador Salgado Filho - RS</item>
+<item>Sentinela do Sul - RS</item>
+<item>Serafina Corrêa - RS</item>
+<item>Sério - RS</item>
+<item>Sertão - RS</item>
+<item>Sertão Santana - RS</item>
+<item>Sete de Setembro - RS</item>
+<item>Severiano de Almeida - RS</item>
+<item>Silveira Martins - RS</item>
+<item>Sinimbu - RS</item>
+<item>Sobradinho - RS</item>
+<item>Soledade - RS</item>
+<item>Tabaí - RS</item>
+<item>Tapejara - RS</item>
+<item>Tapera - RS</item>
+<item>Tapes - RS</item>
+<item>Taquara - RS</item>
+<item>Taquari - RS</item>
+<item>Taquaruçu do Sul - RS</item>
+<item>Tavares - RS</item>
+<item>Tenente Portela - RS</item>
+<item>Terra de Areia - RS</item>
+<item>Teutônia - RS</item>
+<item>Tio Hugo - RS</item>
+<item>Tiradentes do Sul - RS</item>
+<item>Toropi - RS</item>
+<item>Torres - RS</item>
+<item>Tramandaí - RS</item>
+<item>Travesseiro - RS</item>
+<item>Três Arroios - RS</item>
+<item>Três Cachoeiras - RS</item>
+<item>Três Coroas - RS</item>
+<item>Três de Maio - RS</item>
+<item>Três Forquilhas - RS</item>
+<item>Três Palmeiras - RS</item>
+<item>Três Passos - RS</item>
+<item>Trindade do Sul - RS</item>
+<item>Triunfo - RS</item>
+<item>Tucunduva - RS</item>
+<item>Tunas - RS</item>
+<item>Tupanci do Sul - RS</item>
+<item>Tupanciretã - RS</item>
+<item>Tupandi - RS</item>
+<item>Tuparendi - RS</item>
+<item>Turuçu - RS</item>
+<item>Ubiretama - RS</item>
+<item>União da Serra - RS</item>
+<item>Unistalda - RS</item>
+<item>Uruguaiana - RS</item>
+<item>Vacaria - RS</item>
+<item>Vale do Sol - RS</item>
+<item>Vale Real - RS</item>
+<item>Vale Verde - RS</item>
+<item>Vanini - RS</item>
+<item>Venâncio Aires - RS</item>
+<item>Vera Cruz - RS</item>
+<item>Veranópolis - RS</item>
+<item>Vespasiano Corrêa - RS</item>
+<item>Viadutos - RS</item>
+<item>Viamão - RS</item>
+<item>Vicente Dutra - RS</item>
+<item>Victor Graeff - RS</item>
+<item>Vila Flores - RS</item>
+<item>Vila Lângaro - RS</item>
+<item>Vila Maria - RS</item>
+<item>Vila Nova do Sul - RS</item>
+<item>Vista Alegre - RS</item>
+<item>Vista Alegre do Prata - RS</item>
+<item>Vista Gaúcha - RS</item>
+<item>Vitória das Missões - RS</item>
+<item>Westfália - RS</item>
+<item>Xangri-lá - RS</item>
+
+
+        <!-- Santa Catarina -->
+        <item>Abdon Batista - SC</item>
+<item>Abelardo Luz - SC</item>
+<item>Agrolândia - SC</item>
+<item>Agronômica - SC</item>
+<item>Água Doce - SC</item>
+<item>Águas de Chapecó - SC</item>
+<item>Águas Frias - SC</item>
+<item>Águas Mornas - SC</item>
+<item>Alfredo Wagner - SC</item>
+<item>Alto Bela Vista - SC</item>
+<item>Anchieta - SC</item>
+<item>Angelina - SC</item>
+<item>Anita Garibaldi - SC</item>
+<item>Anitápolis - SC</item>
+<item>Antônio Carlos - SC</item>
+<item>Apiúna - SC</item>
+<item>Arabutã - SC</item>
+<item>Araquari - SC</item>
+<item>Araranguá - SC</item>
+<item>Armazém - SC</item>
+<item>Arroio Trinta - SC</item>
+<item>Arvoredo - SC</item>
+<item>Ascurra - SC</item>
+<item>Atalanta - SC</item>
+<item>Aurora - SC</item>
+<item>Balneário Arroio do Silva - SC</item>
+<item>Balneário Barra do Sul - SC</item>
+<item>Balneário Camboriú - SC</item>
+<item>Balneário Gaivota - SC</item>
+<item>Balneário Piçarras - SC</item>
+<item>Balneário Rincão - SC</item>
+<item>Bandeirante - SC</item>
+<item>Barra Bonita - SC</item>
+<item>Barra Velha - SC</item>
+<item>Bela Vista do Toldo - SC</item>
+<item>Belmonte - SC</item>
+<item>Benedito Novo - SC</item>
+<item>Biguaçu - SC</item>
+<item>Blumenau - SC</item>
+<item>Bocaina do Sul - SC</item>
+<item>Bom Jardim da Serra - SC</item>
+<item>Bom Jesus - SC</item>
+<item>Bom Jesus do Oeste - SC</item>
+<item>Bom Retiro - SC</item>
+<item>Bombinhas - SC</item>
+<item>Botuverá - SC</item>
+<item>Braço do Norte - SC</item>
+<item>Braço do Trombudo - SC</item>
+<item>Brunópolis - SC</item>
+<item>Brusque - SC</item>
+<item>Caçador - SC</item>
+<item>Caibi - SC</item>
+<item>Calmon - SC</item>
+<item>Camboriú - SC</item>
+<item>Campo Alegre - SC</item>
+<item>Campo Belo do Sul - SC</item>
+<item>Campo Erê - SC</item>
+<item>Campos Novos - SC</item>
+<item>Canelinha - SC</item>
+<item>Canoinhas - SC</item>
+<item>Capão Alto - SC</item>
+<item>Capinzal - SC</item>
+<item>Capivari de Baixo - SC</item>
+<item>Catanduvas - SC</item>
+<item>Caxambu do Sul - SC</item>
+<item>Celso Ramos - SC</item>
+<item>Cerro Negro - SC</item>
+<item>Chapadão do Lageado - SC</item>
+<item>Chapecó - SC</item>
+<item>Cocal do Sul - SC</item>
+<item>Concórdia - SC</item>
+<item>Cordilheira Alta - SC</item>
+<item>Coronel Freitas - SC</item>
+<item>Coronel Martins - SC</item>
+<item>Correia Pinto - SC</item>
+<item>Corupá - SC</item>
+<item>Criciúma - SC</item>
+<item>Cunha Porã - SC</item>
+<item>Cunhataí - SC</item>
+<item>Curitibanos - SC</item>
+<item>Descanso - SC</item>
+<item>Dionísio Cerqueira - SC</item>
+<item>Dona Emma - SC</item>
+<item>Doutor Pedrinho - SC</item>
+<item>Entre Rios - SC</item>
+<item>Ermo - SC</item>
+<item>Erval Velho - SC</item>
+<item>Faxinal dos Guedes - SC</item>
+<item>Flor do Sertão - SC</item>
+<item>Florianópolis - SC</item>
+<item>Formosa do Sul - SC</item>
+<item>Forquilhinha - SC</item>
+<item>Fraiburgo - SC</item>
+<item>Frei Rogério - SC</item>
+<item>Galvão - SC</item>
+<item>Garopaba - SC</item>
+<item>Garuva - SC</item>
+<item>Gaspar - SC</item>
+<item>Governador Celso Ramos - SC</item>
+<item>Grão-Pará - SC</item>
+<item>Gravatal - SC</item>
+<item>Guabiruba - SC</item>
+<item>Guaraciaba - SC</item>
+<item>Guaramirim - SC</item>
+<item>Guarujá do Sul - SC</item>
+<item>Guatambu - SC</item>
+<item>Herval do Oeste - SC</item>
+<item>Ibiam - SC</item>
+<item>Ibicaré - SC</item>
+<item>Ibirama - SC</item>
+<item>Içara - SC</item>
+<item>Ilhota - SC</item>
+<item>Imaruí - SC</item>
+<item>Imbituba - SC</item>
+<item>Imbuia - SC</item>
+<item>Indaial - SC</item>
+<item>Iomerê - SC</item>
+<item>Ipira - SC</item>
+<item>Iporã do Oeste - SC</item>
+<item>Ipuaçu - SC</item>
+<item>Ipumirim - SC</item>
+<item>Iraceminha - SC</item>
+<item>Irani - SC</item>
+<item>Irati - SC</item>
+<item>Irineópolis - SC</item>
+<item>Itá - SC</item>
+<item>Itaiópolis - SC</item>
+<item>Itajaí - SC</item>
+<item>Itapema - SC</item>
+<item>Itapiranga - SC</item>
+<item>Itapoá - SC</item>
+<item>Ituporanga - SC</item>
+<item>Jaborá - SC</item>
+<item>Jacinto Machado - SC</item>
+<item>Jaguaruna - SC</item>
+<item>Jaraguá do Sul - SC</item>
+<item>Jardinópolis - SC</item>
+<item>Joaçaba - SC</item>
+<item>Joinville - SC</item>
+<item>José Boiteux - SC</item>
+<item>Jupiá - SC</item>
+<item>Lacerdópolis - SC</item>
+<item>Lages - SC</item>
+<item>Laguna - SC</item>
+<item>Lajeado Grande - SC</item>
+<item>Laurentino - SC</item>
+<item>Lauro Muller - SC</item>
+<item>Lebon Régis - SC</item>
+<item>Leoberto Leal - SC</item>
+<item>Lindóia do Sul - SC</item>
+<item>Lontras - SC</item>
+<item>Luiz Alves - SC</item>
+<item>Luzerna - SC</item>
+<item>Macieira - SC</item>
+<item>Mafra - SC</item>
+<item>Major Gercino - SC</item>
+<item>Major Vieira - SC</item>
+<item>Maracajá - SC</item>
+<item>Maravilha - SC</item>
+<item>Marema - SC</item>
+<item>Massaranduba - SC</item>
+<item>Matos Costa - SC</item>
+<item>Meleiro - SC</item>
+<item>Mirim Doce - SC</item>
+<item>Modelo - SC</item>
+<item>Mondaí - SC</item>
+<item>Monte Carlo - SC</item>
+<item>Monte Castelo - SC</item>
+<item>Morro da Fumaça - SC</item>
+<item>Morro Grande - SC</item>
+<item>Navegantes - SC</item>
+<item>Nova Erechim - SC</item>
+<item>Nova Itaberaba - SC</item>
+<item>Nova Trento - SC</item>
+<item>Nova Veneza - SC</item>
+<item>Novo Horizonte - SC</item>
+<item>Orleans - SC</item>
+<item>Otacílio Costa - SC</item>
+<item>Ouro - SC</item>
+<item>Ouro Verde - SC</item>
+<item>Paial - SC</item>
+<item>Painel - SC</item>
+<item>Palhoça - SC</item>
+<item>Palma Sola - SC</item>
+<item>Palmeira - SC</item>
+<item>Palmitos - SC</item>
+<item>Papanduva - SC</item>
+<item>Paraíso - SC</item>
+<item>Passo de Torres - SC</item>
+<item>Passos Maia - SC</item>
+<item>Paulo Lopes - SC</item>
+<item>Pedras Grandes - SC</item>
+<item>Penha - SC</item>
+<item>Peritiba - SC</item>
+<item>Pescaria Brava - SC</item>
+<item>Petrolândia - SC</item>
+<item>Pinhalzinho - SC</item>
+<item>Pinheiro Preto - SC</item>
+<item>Piratuba - SC</item>
+<item>Planalto Alegre - SC</item>
+<item>Pomerode - SC</item>
+<item>Ponte Alta - SC</item>
+<item>Ponte Alta do Norte - SC</item>
+<item>Ponte Serrada - SC</item>
+<item>Porto Belo - SC</item>
+<item>Porto União - SC</item>
+<item>Pouso Redondo - SC</item>
+<item>Praia Grande - SC</item>
+<item>Presidente Castello Branco - SC</item>
+<item>Presidente Getúlio - SC</item>
+<item>Presidente Nereu - SC</item>
+<item>Princesa - SC</item>
+<item>Quilombo - SC</item>
+<item>Rancho Queimado - SC</item>
+<item>Rio das Antas - SC</item>
+<item>Rio do Campo - SC</item>
+<item>Rio do Oeste - SC</item>
+<item>Rio do Sul - SC</item>
+<item>Rio dos Cedros - SC</item>
+<item>Rio Fortuna - SC</item>
+<item>Rio Negrinho - SC</item>
+<item>Rio Rufino - SC</item>
+<item>Riqueza - SC</item>
+<item>Rodeio - SC</item>
+<item>Romelândia - SC</item>
+<item>Salete - SC</item>
+<item>Saltinho - SC</item>
+<item>Salto Veloso - SC</item>
+<item>Sangão - SC</item>
+<item>Santa Cecília - SC</item>
+<item>Santa Helena - SC</item>
+<item>Santa Rosa de Lima - SC</item>
+<item>Santa Rosa do Sul - SC</item>
+<item>Santa Terezinha - SC</item>
+<item>Santa Terezinha do Progresso - SC</item>
+<item>Santiago do Sul - SC</item>
+<item>Santo Amaro da Imperatriz - SC</item>
+<item>São Bento do Sul - SC</item>
+<item>São Bernardino - SC</item>
+<item>São Bonifácio - SC</item>
+<item>São Carlos - SC</item>
+<item>São Cristóvão do Sul - SC</item>
+<item>São Domingos - SC</item>
+<item>São Francisco do Sul - SC</item>
+<item>São João Batista - SC</item>
+<item>São João do Itaperiú - SC</item>
+<item>São João do Oeste - SC</item>
+<item>São João do Sul - SC</item>
+<item>São Joaquim - SC</item>
+<item>São José - SC</item>
+<item>São José do Cedro - SC</item>
+<item>São José do Cerrito - SC</item>
+<item>São Lourenço do Oeste - SC</item>
+<item>São Ludgero - SC</item>
+<item>São Martinho - SC</item>
+<item>São Miguel da Boa Vista - SC</item>
+<item>São Miguel do Oeste - SC</item>
+<item>São Pedro de Alcântara - SC</item>
+<item>Saudades - SC</item>
+<item>Schroeder - SC</item>
+<item>Seara - SC</item>
+<item>Serra Alta - SC</item>
+<item>Siderópolis - SC</item>
+<item>Sombrio - SC</item>
+<item>Sul Brasil - SC</item>
+<item>Taió - SC</item>
+<item>Tangará - SC</item>
+<item>Tigrinhos - SC</item>
+<item>Tijucas - SC</item>
+<item>Timbé do Sul - SC</item>
+<item>Timbó - SC</item>
+<item>Timbó Grande - SC</item>
+<item>Três Barras - SC</item>
+<item>Treviso - SC</item>
+<item>Treze de Maio - SC</item>
+<item>Treze Tílias - SC</item>
+<item>Trombudo Central - SC</item>
+<item>Tubarão - SC</item>
+<item>Tunápolis - SC</item>
+<item>Turvo - SC</item>
+<item>União do Oeste - SC</item>
+<item>Urubici - SC</item>
+<item>Urupema - SC</item>
+<item>Urussanga - SC</item>
+<item>Vargeão - SC</item>
+<item>Vargem - SC</item>
+<item>Vargem Bonita - SC</item>
+<item>Vidal Ramos - SC</item>
+<item>Videira - SC</item>
+<item>Vitor Meireles - SC</item>
+<item>Witmarsum - SC</item>
+<item>Xanxerê - SC</item>
+<item>Xavantina - SC</item>
+<item>Xaxim - SC</item>
+<item>Zortéa - SC</item>
+
+        <!-- Cities in Paraná -->
+        <item>Abatiá - PR</item>
+<item>Adrianópolis - PR</item>
+<item>Agudos do Sul - PR</item>
+<item>Almirante Tamandaré - PR</item>
+<item>Altamira do Paraná - PR</item>
+<item>Altônia - PR</item>
+<item>Alto Paraná - PR</item>
+<item>Alto Piquiri - PR</item>
+<item>Alvorada do Sul - PR</item>
+<item>Amaporã - PR</item>
+<item>Ampére - PR</item>
+<item>Anahy - PR</item>
+<item>Andirá - PR</item>
+<item>Ângulo - PR</item>
+<item>Antonina - PR</item>
+<item>Antônio Olinto - PR</item>
+<item>Apucarana - PR</item>
+<item>Arapongas - PR</item>
+<item>Arapoti - PR</item>
+<item>Arapuã - PR</item>
+<item>Araruna - PR</item>
+<item>Araucária - PR</item>
+<item>Ariranha do Ivaí - PR</item>
+<item>Assaí - PR</item>
+<item>Assis Chateaubriand - PR</item>
+<item>Astorga - PR</item>
+<item>Atalaia - PR</item>
+<item>Balsa Nova - PR</item>
+<item>Bandeirantes - PR</item>
+<item>Barbosa Ferraz - PR</item>
+<item>Barra do Jacaré - PR</item>
+<item>Barracão - PR</item>
+<item>Bela Vista da Caroba - PR</item>
+<item>Bela Vista do Paraíso - PR</item>
+<item>Bituruna - PR</item>
+<item>Boa Esperança - PR</item>
+<item>Boa Esperança do Iguaçu - PR</item>
+<item>Boa Ventura de São Roque - PR</item>
+<item>Boa Vista da Aparecida - PR</item>
+<item>Bocaiúva do Sul - PR</item>
+<item>Bom Jesus do Sul - PR</item>
+<item>Bom Sucesso - PR</item>
+<item>Bom Sucesso do Sul - PR</item>
+<item>Borrazópolis - PR</item>
+<item>Braganey - PR</item>
+<item>Brasilândia do Sul - PR</item>
+<item>Cafeara - PR</item>
+<item>Cafelândia - PR</item>
+<item>Cafezal do Sul - PR</item>
+<item>Califórnia - PR</item>
+<item>Cambará - PR</item>
+<item>Cambé - PR</item>
+<item>Cambira - PR</item>
+<item>Campina da Lagoa - PR</item>
+<item>Campina do Simão - PR</item>
+<item>Campina Grande do Sul - PR</item>
+<item>Campo Bonito - PR</item>
+<item>Campo do Tenente - PR</item>
+<item>Campo Largo - PR</item>
+<item>Campo Magro - PR</item>
+<item>Campo Mourão - PR</item>
+<item>Cândido de Abreu - PR</item>
+<item>Candói - PR</item>
+<item>Cantagalo - PR</item>
+<item>Capanema - PR</item>
+<item>Capitão Leônidas Marques - PR</item>
+<item>Carambeí - PR</item>
+<item>Carlópolis - PR</item>
+<item>Cascavel - PR</item>
+<item>Castro - PR</item>
+<item>Catanduvas - PR</item>
+<item>Centenário do Sul - PR</item>
+<item>Cerro Azul - PR</item>
+<item>Céu Azul - PR</item>
+<item>Chopinzinho - PR</item>
+<item>Cianorte - PR</item>
+<item>Cidade Gaúcha - PR</item>
+<item>Clevelândia - PR</item>
+<item>Colombo - PR</item>
+<item>Colorado - PR</item>
+<item>Congonhinhas - PR</item>
+<item>Conselheiro Mairinck - PR</item>
+<item>Contenda - PR</item>
+<item>Corbélia - PR</item>
+<item>Cornélio Procópio - PR</item>
+<item>Coronel Domingos Soares - PR</item>
+<item>Coronel Vivida - PR</item>
+<item>Corumbataí do Sul - PR</item>
+<item>Cruz Machado - PR</item>
+<item>Cruzeiro do Iguaçu - PR</item>
+<item>Cruzeiro do Oeste - PR</item>
+<item>Cruzeiro do Sul - PR</item>
+<item>Cruzmaltina - PR</item>
+<item>Curitiba - PR</item>
+<item>Curiúva - PR</item>
+<item>Diamante do Oeste - PR</item>
+<item>Diamante do Norte - PR</item>
+<item>Diamante do Sul - PR</item>
+<item>Dois Vizinhos - PR</item>
+<item>Douradina - PR</item>
+<item>Doutor Camargo - PR</item>
+<item>Doutor Ulysses - PR</item>
+<item>Enéas Marques - PR</item>
+<item>Engenheiro Beltrão - PR</item>
+<item>Entre Rios do Oeste - PR</item>
+<item>Esperança Nova - PR</item>
+<item>Espigão Alto do Iguaçu - PR</item>
+<item>Farol - PR</item>
+<item>Faxinal - PR</item>
+<item>Fazenda Rio Grande - PR</item>
+<item>Fênix - PR</item>
+<item>Fernandes Pinheiro - PR</item>
+<item>Figueira - PR</item>
+<item>Flor da Serra do Sul - PR</item>
+<item>Floraí - PR</item>
+<item>Floresta - PR</item>
+<item>Florestópolis - PR</item>
+<item>Flórida - PR</item>
+<item>Formosa do Oeste - PR</item>
+<item>Foz do Iguaçu - PR</item>
+<item>Foz do Jordão - PR</item>
+<item>Francisco Alves - PR</item>
+<item>Francisco Beltrão - PR</item>
+<item>General Carneiro - PR</item>
+<item>Godoy Moreira - PR</item>
+<item>Goioerê - PR</item>
+<item>Goioxim - PR</item>
+<item>Grandes Rios - PR</item>
+<item>Guaíra - PR</item>
+<item>Guairaçá - PR</item>
+<item>Guamiranga - PR</item>
+<item>Guapirama - PR</item>
+<item>Guaporema - PR</item>
+<item>Guaraci - PR</item>
+<item>Guaraniaçu - PR</item>
+<item>Guarapuava - PR</item>
+<item>Guaraqueçaba - PR</item>
+<item>Guaratuba - PR</item>
+<item>Honório Serpa - PR</item>
+<item>Icaraíma - PR</item>
+<item>Ibaiti - PR</item>
+<item>Ibema - PR</item>
+<item>Ibiporã - PR</item>
+<item>Icaraíma - PR</item>
+<item>Imbaú - PR</item>
+<item>Imbituva - PR</item>
+<item>Inácio Martins - PR</item>
+<item>Inajá - PR</item>
+<item>Indianópolis - PR</item>
+<item>Ipiranga - PR</item>
+<item>Iporã - PR</item>
+<item>Iracema do Oeste - PR</item>
+<item>Irati - PR</item>
+<item>Iretama - PR</item>
+<item>Itaguajé - PR</item>
+<item>Itaipulândia - PR</item>
+<item>Itambaracá - PR</item>
+<item>Itambé - PR</item>
+<item>Itapejara do Oeste - PR</item>
+<item>Itaperuçu - PR</item>
+<item>Itaúna do Sul - PR</item>
+<item>Ivaí - PR</item>
+<item>Ivaiporã - PR</item>
+<item>Ivaté - PR</item>
+<item>Ivatuba - PR</item>
+<item>Jaboti - PR</item>
+<item>Jacarezinho - PR</item>
+<item>Jaguapitã - PR</item>
+<item>Jaguariaíva - PR</item>
+<item>Jandaia do Sul - PR</item>
+<item>Janiópolis - PR</item>
+<item>Japira - PR</item>
+<item>Japurá - PR</item>
+<item>Jardim Alegre - PR</item>
+<item>Jardim Olinda - PR</item>
+<item>Jataizinho - PR</item>
+<item>Jesuítas - PR</item>
+<item>Joaquim Távora - PR</item>
+<item>Jundiaí do Sul - PR</item>
+<item>Juranda - PR</item>
+<item>Jussara - PR</item>
+<item>Kaloré - PR</item>
+<item>Lapa - PR</item>
+<item>Laranjal - PR</item>
+<item>Laranjeiras do Sul - PR</item>
+<item>Leópolis - PR</item>
+<item>Lidianópolis - PR</item>
+<item>Lindoeste - PR</item>
+<item>Loanda - PR</item>
+<item>Lobato - PR</item>
+<item>Londrina - PR</item>
+<item>Luiziana - PR</item>
+<item>Lunardelli - PR</item>
+<item>Lupionópolis - PR</item>
+<item>Mallet - PR</item>
+<item>Mamborê - PR</item>
+<item>Mandaguaçu - PR</item>
+<item>Mandaguari - PR</item>
+<item>Mandirituba - PR</item>
+<item>Manfrinópolis - PR</item>
+<item>Mangueirinha - PR</item>
+<item>Manoel Ribas - PR</item>
+<item>Marechal Cândido Rondon - PR</item>
+<item>Maria Helena - PR</item>
+<item>Marialva - PR</item>
+<item>Marilândia do Sul - PR</item>
+<item>Marilena - PR</item>
+<item>Mariluz - PR</item>
+<item>Maringá - PR</item>
+<item>Mariópolis - PR</item>
+<item>Maripá - PR</item>
+<item>Marmeleiro - PR</item>
+<item>Marquinho - PR</item>
+<item>Marumbi - PR</item>
+<item>Matelândia - PR</item>
+<item>Matinhos - PR</item>
+<item>Mato Rico - PR</item>
+<item>Mauá da Serra - PR</item>
+<item>Medianeira - PR</item>
+<item>Mercedes - PR</item>
+<item>Mirador - PR</item>
+<item>Miraselva - PR</item>
+<item>Missal - PR</item>
+<item>Moreira Sales - PR</item>
+<item>Morretes - PR</item>
+<item>Munhoz de Melo - PR</item>
+<item>Nossa Senhora das Graças - PR</item>
+<item>Nova Aliança do Ivaí - PR</item>
+<item>Nova América da Colina - PR</item>
+<item>Nova Aurora - PR</item>
+<item>Nova Cantu - PR</item>
+<item>Nova Esperança - PR</item>
+<item>Nova Esperança do Sudoeste - PR</item>
+<item>Nova Fátima - PR</item>
+<item>Nova Laranjeiras - PR</item>
+<item>Nova Londrina - PR</item>
+<item>Nova Olímpia - PR</item>
+<item>Nova Prata do Iguaçu - PR</item>
+<item>Novo Itacolomi - PR</item>
+<item>Ortigueira - PR</item>
+<item>Ourizona - PR</item>
+<item>Ouro Verde do Oeste - PR</item>
+<item>Paiçandu - PR</item>
+<item>Palmas - PR</item>
+<item>Palmeira - PR</item>
+<item>Palmital - PR</item>
+<item>Palotina - PR</item>
+<item>Paraíso do Norte - PR</item>
+<item>Paranacity - PR</item>
+<item>Paranaguá - PR</item>
+<item>Paranapoema - PR</item>
+<item>Paranavaí - PR</item>
+<item>Pato Bragado - PR</item>
+<item>Pato Branco - PR</item>
+<item>Paula Freitas - PR</item>
+<item>Paulo Frontin - PR</item>
+<item>Peabiru - PR</item>
+<item>Perobal - PR</item>
+<item>Pérola - PR</item>
+<item>Pérola do Oeste - PR</item>
+<item>Piên - PR</item>
+<item>Pinhais - PR</item>
+<item>Pinhal de São Bento - PR</item>
+<item>Pinhalão - PR</item>
+<item>Pinhão - PR</item>
+<item>Piraí do Sul - PR</item>
+<item>Piraquara - PR</item>
+<item>Pitanga - PR</item>
+<item>Pitangueiras - PR</item>
+<item>Planaltina do Paraná - PR</item>
+<item>Planalto - PR</item>
+<item>Ponta Grossa - PR</item>
+<item>Pontal do Paraná - PR</item>
+<item>Porecatu - PR</item>
+<item>Porto Amazonas - PR</item>
+<item>Porto Barreiro - PR</item>
+<item>Porto Rico - PR</item>
+<item>Porto Vitória - PR</item>
+<item>Prado Ferreira - PR</item>
+<item>Pranchita - PR</item>
+<item>Presidente Castelo Branco - PR</item>
+<item>Primeiro de Maio - PR</item>
+<item>Prudentópolis - PR</item>
+<item>Quarto Centenário - PR</item>
+<item>Quatiguá - PR</item>
+<item>Quatro Barras - PR</item>
+<item>Quatro Pontes - PR</item>
+<item>Quedas do Iguaçu - PR</item>
+<item>Querência do Norte - PR</item>
+<item>Quinta do Sol - PR</item>
+<item>Quitandinha - PR</item>
+<item>Ramilândia - PR</item>
+<item>Rancho Alegre - PR</item>
+<item>Rancho Alegre do Oeste - PR</item>
+<item>Realeza - PR</item>
+<item>Rebouças - PR</item>
+<item>Renascença - PR</item>
+<item>Reserva - PR</item>
+<item>Reserva do Iguaçu - PR</item>
+<item>Ribeirão Claro - PR</item>
+<item>Ribeirão do Pinhal - PR</item>
+<item>Rio Azul - PR</item>
+<item>Rio Bom - PR</item>
+<item>Rio Bonito do Iguaçu - PR</item>
+<item>Rio Branco do Ivaí - PR</item>
+<item>Rio Branco do Sul - PR</item>
+<item>Rio Negro - PR</item>
+<item>Rolândia - PR</item>
+<item>Roncador - PR</item>
+<item>Rondon - PR</item>
+<item>Rosário do Ivaí - PR</item>
+<item>Sabáudia - PR</item>
+<item>Salgado Filho - PR</item>
+<item>Salto do Itararé - PR</item>
+<item>Salto do Lontra - PR</item>
+<item>Santa Amélia - PR</item>
+<item>Santa Cecília do Pavão - PR</item>
+<item>Santa Cruz de Monte Castelo - PR</item>
+<item>Santa Fé - PR</item>
+<item>Santa Helena - PR</item>
+<item>Santa Inês - PR</item>
+<item>Santa Isabel do Ivaí - PR</item>
+<item>Santa Izabel do Oeste - PR</item>
+<item>Santa Lúcia - PR</item>
+<item>Santa Maria do Oeste - PR</item>
+<item>Santa Mariana - PR</item>
+<item>Santa Mônica - PR</item>
+<item>Santa Tereza do Oeste - PR</item>
+<item>Santa Terezinha de Itaipu - PR</item>
+<item>Santana do Itararé - PR</item>
+<item>Santo Antônio da Platina - PR</item>
+<item>Santo Antônio do Caiuá - PR</item>
+<item>Santo Antônio do Paraíso - PR</item>
+<item>Santo Antônio do Sudoeste - PR</item>
+<item>Santo Inácio - PR</item>
+<item>São Carlos do Ivaí - PR</item>
+<item>São Jerônimo da Serra - PR</item>
+<item>São João - PR</item>
+<item>São João do Caiuá - PR</item>
+<item>São João do Ivaí - PR</item>
+<item>São João do Triunfo - PR</item>
+<item>São Jorge do Ivaí - PR</item>
+<item>São Jorge do Patrocínio - PR</item>
+<item>São José da Boa Vista - PR</item>
+<item>São José das Palmeiras - PR</item>
+<item>São José dos Pinhais - PR</item>
+<item>São Manoel do Paraná - PR</item>
+<item>São Mateus do Sul - PR</item>
+<item>São Miguel do Iguaçu - PR</item>
+<item>São Pedro do Iguaçu - PR</item>
+<item>São Pedro do Ivaí - PR</item>
+<item>São Pedro do Paraná - PR</item>
+<item>São Sebastião da Amoreira - PR</item>
+<item>São Tomé - PR</item>
+<item>Sapopema - PR</item>
+<item>Sarandi - PR</item>
+<item>Saudade do Iguaçu - PR</item>
+<item>Sengés - PR</item>
+<item>Serranópolis do Iguaçu - PR</item>
+<item>Sertaneja - PR</item>
+<item>Sertanópolis - PR</item>
+<item>Siqueira Campos - PR</item>
+<item>Sulina - PR</item>
+<item>Tamarana - PR</item>
+<item>Tamboara - PR</item>
+<item>Tapejara - PR</item>
+<item>Tapira - PR</item>
+<item>Teixeira Soares - PR</item>
+<item>Telêmaco Borba - PR</item>
+<item>Terra Boa - PR</item>
+<item>Terra Rica - PR</item>
+<item>Terra Roxa - PR</item>
+<item>Tibagi - PR</item>
+<item>Tijucas do Sul - PR</item>
+<item>Toledo - PR</item>
+<item>Tomazina - PR</item>
+<item>Três Barras do Paraná - PR</item>
+<item>Tunas do Paraná - PR</item>
+<item>Tuneiras do Oeste - PR</item>
+<item>Tupãssi - PR</item>
+<item>Turvo - PR</item>
+<item>Ubiratã - PR</item>
+<item>Umuarama - PR</item>
+<item>União da Vitória - PR</item>
+<item>Uniflor - PR</item>
+<item>Uraí - PR</item>
+<item>Ventania - PR</item>
+<item>Vera Cruz do Oeste - PR</item>
+<item>Verê - PR</item>
+<item>Virmond - PR</item>
+<item>Vitorino - PR</item>
+<item>Wenceslau Braz - PR</item>
+<item>Xambrê - PR</item>
+    </string-array>
+</resources>

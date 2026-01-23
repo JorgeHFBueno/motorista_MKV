@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/popupTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Abrir Chamado Para Abastecimento?"
+            android:textSize="18sp"
+            android:textColor="@color/azul_escuro"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:background="@drawable/edittext_background"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/abrirButton"
+            android:backgroundTint="@color/azul_escuro"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Abrir" />
+
+        <Button
+            android:id="@+id/cancelarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="@color/azul_escuro"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/fecharButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fechar"
+            android:backgroundTint="@color/azul_escuro"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

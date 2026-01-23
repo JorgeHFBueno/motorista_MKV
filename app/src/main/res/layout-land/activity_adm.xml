@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdmActivity">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTitulo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Administração"
+        android:textColor="@color/azul_escuro"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <!-- Layout agrupando os botões -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBotoes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp">
+
+        <!-- Botão Notificações -->
+        <Button
+            android:id="@+id/notiButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/notificacoes"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.48"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botão Frota -->
+        <Button
+            android:id="@+id/truckButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/frota"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintWidth_percent="0.48"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botão Quero Abastecer -->
+        <Button
+            android:id="@+id/fuelButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/quero_abastecer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notiButton"
+            app:layout_constraintWidth_percent="0.48" />
+
+        <!-- Botão Combustível -->
+        <Button
+            android:id="@+id/CombButt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/combustivel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintTop_toBottomOf="@id/truckButton"
+            app:layout_constraintWidth_percent="0.48" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Botão de Voltar -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="110dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/voltar_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

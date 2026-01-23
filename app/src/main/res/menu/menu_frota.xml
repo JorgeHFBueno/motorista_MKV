@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Chegadas -->
+    <item
+        android:id="@+id/menu_chegadas"
+        android:title="CHEGADAS"
+        android:orderInCategory="0"
+        app:showAsAction="ifRoom" />
+
+    <!-- Saídas -->
+    <item
+        android:id="@+id/menu_saidas"
+        android:title="SAÍDAS"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom" />
+
+    <!-- “Tudo” -->
+    <item
+        android:id="@+id/menu_tudo"
+        android:title="TUDO"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom" />
+
+    <!-- Placa (lógica a implementar) -->
+    <item
+        android:id="@+id/menu_placa"
+        android:title="PLACA"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
+    <!-- Data (lógica a implementar) -->
+    <item
+        android:id="@+id/menu_data"
+        android:title="DATA"
+        android:orderInCategory="4"
+        app:showAsAction="never" />
+
+    <!-- Limpar -->
+    <item
+        android:id="@+id/menu_limpar"
+        android:title="LIMPAR"
+        android:orderInCategory="5"
+        app:showAsAction="ifRoom" />
+
+</menu>

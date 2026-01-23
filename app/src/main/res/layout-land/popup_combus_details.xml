@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    app:layout_constraintWidth_percent="0.80">
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/azul_claroFundo"
+            app:layout_constraintBottom_toTopOf="@+id/delButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/popupPlacaTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Placa:"
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/popupPlacaTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupPlacaTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupDataTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Data:"
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupPlacaTextView" />
+
+                        <TextView
+                            android:id="@+id/popupLFTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Montante Final: "
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupDataTextView" />
+
+                        <TextView
+                            android:id="@+id/popupQaTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Qnt. Abastecida: "
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLFTextView" />
+
+                        <TextView
+                            android:id="@+id/popupDataTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupDataTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupLFTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupLFTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupQaTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupQaTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupLITextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupLITextView2" />
+
+                        <TextView
+                            android:id="@+id/popupLITextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Montante Inicial: "
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupQaTextView" />
+
+                        <TextView
+                            android:id="@+id/popupKMTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="KM:"
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLITextView" />
+
+                        <TextView
+                            android:id="@+id/popupKMTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupKMTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupMotoristaTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupMotoristaTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupParaQuemTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupParaQuemTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupARLATextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupARLATextView2" />
+
+                        <TextView
+                            android:id="@+id/popupObsTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupObsTextView2" />
+
+
+                        <TextView
+                            android:id="@+id/popupMotoristaTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Frentista: "
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupKMTextView" />
+
+                        <TextView
+                            android:id="@+id/popupMotivoTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Motivo:"
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupMotoristaTextView" />
+
+                        <TextView
+                            android:id="@+id/popupParaQuemTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Motorista: "
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupMotivoTextView" />
+
+                        <TextView
+                            android:id="@+id/popupARLATextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Arla:"
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupParaQuemTextView" />
+
+                        <TextView
+                            android:id="@+id/popupMotivoTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/edittext_background"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/popupLITextView2"
+                            app:layout_constraintTop_toTopOf="@+id/popupMotivoTextView2" />
+
+                        <TextView
+                            android:id="@+id/popupObsTextView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Obs:"
+                            android:textColor="@color/azul_escuro"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupARLATextView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:backgroundTint="@color/azul_escuro"
+            android:text="Editar"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/delButton"
+            app:layout_constraintStart_toEndOf="@+id/delButton"
+            app:layout_constraintTop_toTopOf="@+id/delButton" />
+
+        <Button
+            android:id="@+id/delButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/azul_escuro"
+            android:text="Excluir"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/azul_escuro"
+            android:text="Fechar"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/delButton"
+            app:layout_constraintEnd_toStartOf="@+id/delButton"
+            app:layout_constraintTop_toTopOf="@+id/delButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

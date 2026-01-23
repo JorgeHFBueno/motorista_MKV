@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "351178495955",
+    "firebase_url": "https://app-motor-api-default-rtdb.firebaseio.com",
+    "project_id": "app-motor-api",
+    "storage_bucket": "app-motor-api.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351178495955:android:8f0f83a09c9537767c0126",
+        "android_client_info": {
+          "package_name": "com.example.motorista_mkiv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyBwbK_R-2veSLNl41QVzj-zn77mshkt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351178495955:android:2b89cabbcb0e6bff7c0126",
+        "android_client_info": {
+          "package_name": "com.example.motorista_mkv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyBwbK_R-2veSLNl41QVzj-zn77mshkt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

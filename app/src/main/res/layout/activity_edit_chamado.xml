@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/truck_bg"
+    tools:context=".adm.notificacoes.EditChamadoActivity">
+
+    <TextView
+        android:id="@+id/tvTitulo7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verificação de Chamado"
+        android:textColor="@color/azul_escuro"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/backButton" />
+
+    <TextView
+        android:id="@+id/tituloTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Titulo: "
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButton" />
+
+    <TextView
+        android:id="@+id/tituloTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Chamado"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/mensagemTextView1"
+        app:layout_constraintTop_toTopOf="@+id/tituloTextView1" />
+
+    <TextView
+        android:id="@+id/mensagemTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Mensagem:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tituloTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/tituloTextView" />
+
+    <TextView
+        android:id="@+id/mensagemTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:singleLine="false"
+        android:text="Litragem Atual: 101790, Nova Litragem: 20"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mensagemTextView1"
+        app:layout_constraintTop_toTopOf="@+id/mensagemTextView1" />
+
+    <TextView
+        android:id="@+id/userIdTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Motorista:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/mensagemTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/mensagemTextView" />
+
+    <TextView
+        android:id="@+id/userIdTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Motora"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/mensagemTextView1"
+        app:layout_constraintTop_toTopOf="@+id/userIdTextView1" />
+
+    <TextView
+        android:id="@+id/dataTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Data:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/userIdTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/userIdTextView" />
+
+    <TextView
+        android:id="@+id/dataTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Data"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/mensagemTextView1"
+        app:layout_constraintTop_toTopOf="@+id/dataTextView1" />
+
+    <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Status:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/dataTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/dataTextView" />
+
+    <Spinner
+        android:id="@+id/statusSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Motivo"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textStatus" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="220dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/azul_escuro"
+        android:text="Salvar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="110dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <FrameLayout
+        android:id="@+id/successOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/successGif"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/thumbs_up" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

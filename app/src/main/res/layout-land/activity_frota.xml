@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".frota.FrotaActivityOLD">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTitulo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestão de Frota"
+        android:textColor="@color/azul_escuro"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <!-- Layout agrupando os botões -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBotoes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo2">
+
+        <!-- Botão 1 (Placas) -->
+        <Button
+            android:id="@+id/frotaHistButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/placas"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.48" />
+
+        <!-- Botão 2 (Status) -->
+        <Button
+            android:id="@+id/frotaLiveButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.48" />
+
+        <!-- Botão 3 (Em Viagem) -->
+        <Button
+            android:id="@+id/saidasButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/em_viagem"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frotaHistButton"
+            app:layout_constraintWidth_percent="0.48" />
+
+        <!-- Botão 4 (Pátio) -->
+        <Button
+            android:id="@+id/chegadasButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/patio"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.22"
+            app:layout_constraintTop_toBottomOf="@id/frotaLiveButton"
+            app:layout_constraintWidth_percent="0.48" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Botão de Voltar -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="110dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/voltar_adm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

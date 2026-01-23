@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edittext_background"
+    android:padding="16dp">
+
+    <!-- Descrição: Placa -->
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/azul_escuro"
+        android:text="voltar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/delButton"
+        app:layout_constraintEnd_toStartOf="@+id/delButton"
+        app:layout_constraintTop_toTopOf="@+id/delButton" />
+
+    <Button
+        android:id="@+id/delButton"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/azul_escuro"
+        android:text="Excluir"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popupMotivoTextView" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/azul_escuro"
+        android:text="editar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/delButton"
+        app:layout_constraintStart_toEndOf="@+id/delButton"
+        app:layout_constraintTop_toTopOf="@+id/delButton" />
+
+    <TextView
+        android:id="@+id/placaLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Placa:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Valor: Placa -->
+    <TextView
+        android:id="@+id/popupPlacaTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/motoristaLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/placaLabelTextView" />
+
+    <!-- Descrição: Motorista -->
+    <TextView
+        android:id="@+id/motoristaLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Motorista:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popupPlacaTextView" />
+    <!-- Valor: Motorista -->
+    <TextView
+        android:id="@+id/popupMotoristaTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/motoristaLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/motoristaLabelTextView" />
+
+    <!-- Descrição: Local -->
+    <TextView
+        android:id="@+id/localLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Local:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popupMotoristaTextView" />
+    <!-- Valor: Local -->
+    <TextView
+        android:id="@+id/popupLocalTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/motoristaLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/localLabelTextView" />
+
+    <!-- Descrição: KM -->
+    <TextView
+        android:id="@+id/kmLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="KM:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popupLocalTextView" />
+    <!-- Valor: KM -->
+    <TextView
+        android:id="@+id/popupKmTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/motoristaLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/kmLabelTextView" />
+
+    <!-- Descrição: Data -->
+    <TextView
+        android:id="@+id/dataLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Data:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popupKmTextView" />
+    <!-- Valor: Data -->
+    <TextView
+        android:id="@+id/popupDataTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/motoristaLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/dataLabelTextView" />
+
+    <!-- Descrição: Motivo -->
+    <TextView
+        android:id="@+id/MotivoLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Motivo:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popupDataTextView" />
+    <!-- Valor: Motivo -->
+    <TextView
+        android:id="@+id/popupMotivoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/motoristaLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/MotivoLabelTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

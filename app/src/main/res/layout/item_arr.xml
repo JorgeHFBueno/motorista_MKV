@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edittext_background"
+    android:padding="16dp">
+
+    <!-- Descrição: Placa -->
+    <TextView
+        android:id="@+id/placaLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Placa:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="25sp"
+        android:padding="8dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Valor: Placa -->
+    <TextView
+        android:id="@+id/placaValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text=""
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/driverLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/placaLabelTextView" />
+
+    <!-- Descrição: Local -->
+    <TextView
+        android:id="@+id/driverLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Motorista:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataValueTextView" />
+    <!-- Valor: Local -->
+    <TextView
+        android:id="@+id/driverValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/driverLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/driverLabelTextView" />
+
+    <!-- Descrição: Data -->
+    <TextView
+        android:id="@+id/dataLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Data:"
+        android:textColor="@color/azul_escuro"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placaValueTextView" />
+    <!-- Valor: Data -->
+    <TextView
+        android:id="@+id/dataValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittext_background"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/driverLabelTextView"
+        app:layout_constraintTop_toTopOf="@id/dataLabelTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

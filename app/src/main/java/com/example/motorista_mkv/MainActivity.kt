@@ -36,8 +36,14 @@ import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.google.firebase.firestore.FieldValue
 
 class MainActivity : AppCompatActivity() {
+    private companion object {
+        const val COL_VEICULOS = "veiculos"
+        const val FIELD_QUILOMETRAGEM_ULTIMA = "quilometragemUltima"
+        const val FIELD_DATA_ATUALIZACAO = "dataUltimaAtualizacao"
+    }
 
     private lateinit var departureButton: Button
     private lateinit var arrivalButton: Button
@@ -346,26 +352,19 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     Log.d("OfflineSync", "Sincronizado com sucesso: $docId")
 
-                    // Atualiza o campo km na coleção "01-placas"
-                    firestore.collection("01-placas")
-                        .whereEqualTo("placa", placa)
-                        .get()
-                        .addOnSuccessListener { snapshot ->
-                            for (doc in snapshot.documents) {
-                                firestore.collection("01-placas")
-                                    .document(doc.id)
-                                    .update("km", km)
-                                    .addOnSuccessListener {
-                                        Log.d("OfflineSync", "KM atualizado em 01-placas para $placa: $km")
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Log.e("OfflineSync", "Erro ao atualizar KM da placa $placa", e)
-                                    }
-                            }
+                    firestore.collection(COL_VEICULOS)
+                        .document(placa)
+                        .update(
+                            FIELD_QUILOMETRAGEM_ULTIMA,
+                            km,
+                            FIELD_DATA_ATUALIZACAO,
+                            FieldValue.serverTimestamp()
+                        )
+                        .addOnSuccessListener {
+                            Log.d("OfflineSync", "Quilometragem atualizada em $placa: $km")
                         }
                         .addOnFailureListener { e ->
-                            Log.e("OfflineSync", "Erro ao buscar placa $placa para update de KM", e)
-                        }
+                            Log.e("OfflineSync", "Erro ao atualizar quilometragem em $placa", e)                        }
                 }
                 .addOnFailureListener { e ->
                     Log.e("OfflineSync", "Erro ao sincronizar $docId", e)

@@ -20,6 +20,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EditCombustivelActivity : AppCompatActivity() {
+    private companion object {
+        const val COL_VEICULOS = "veiculos"
+        const val FIELD_CATEGORIA = "categoria"
+        const val FIELD_IDENTIFICADOR = "identificador"
+        const val FIELD_ATIVO = "ativo"
+    }
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
@@ -299,52 +305,36 @@ class EditCombustivelActivity : AppCompatActivity() {
         motoristaEditText.setAdapter(adapter)
     }
 
-    /**
-     * Busca as placas padrão (campo "placa") da coleção "01-placas"
-     * e configura o adapter do AutoCompleteTextView.
-     */
     private fun fetchPlates() {
-        firestore.collection("01-placas")
-            .orderBy("placa", Query.Direction.ASCENDING)
-            .get()
-            .addOnSuccessListener { result ->
-                platesList.clear()
-                for (document in result) {
-                    val plateNumber = document.getString("placa")
-                    if (plateNumber != null) {
-                        platesList.add(plateNumber)
-                    }
-                }
-                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, platesList)
-                placaAutoCompleteTextView.setAdapter(adapter)
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, "Erro recuperando placas: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
+        fetchVehiclesByCategory("PLACA")
     }
 
-    /**
-     * Busca as placas do tipo extra (campo "extra") da coleção "01-placas"
-     * e configura o adapter do AutoCompleteTextView.
-     */
     private fun fetchPlatesExtra() {
-        firestore.collection("01-placas")
-            .orderBy("extra", Query.Direction.ASCENDING)
+        fetchVehiclesByCategory("EXTRA")
+    }
+
+    private fun fetchVehiclesByCategory(category: String) {
+        firestore.collection(COL_VEICULOS)
+            .whereEqualTo(FIELD_CATEGORIA, category)
+            .orderBy(FIELD_IDENTIFICADOR, Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 platesList.clear()
                 for (document in result) {
-                    val plateNumber = document.getString("extra")
-                    if (plateNumber != null) {
-                        platesList.add(plateNumber)
+                    val isActive = document.getBoolean(FIELD_ATIVO)
+                    if (isActive == false) {
+                        continue
+                    }
+                    val identificador = document.getString(FIELD_IDENTIFICADOR) ?: document.id
+                    if (identificador.isNotBlank()) {
+                        platesList.add(identificador)
                     }
                 }
                 val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, platesList)
                 placaAutoCompleteTextView.setAdapter(adapter)
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Erro recuperando placas extra: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
+                Toast.makeText(this, "Erro recuperando placas: ${exception.message}", Toast.LENGTH_SHORT).show()            }
     }
 
     private fun setupEditTextsAndWatchers() {

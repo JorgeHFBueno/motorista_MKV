@@ -36,6 +36,7 @@ import org.json.JSONObject
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
+import com.google.firebase.firestore.FieldValue
 
 class DepartureActivity : AppCompatActivity() {
 
@@ -51,6 +52,15 @@ class DepartureActivity : AppCompatActivity() {
     private var currentKm: Int = 0
     private val PREFS_NAME = "LoginPrefs"
     private val platesList = mutableListOf<String>()
+
+    private companion object {
+        const val COL_VEICULOS = "veiculos"
+        const val FIELD_CATEGORIA = "categoria"
+        const val FIELD_IDENTIFICADOR = "identificador"
+        const val FIELD_ATIVO = "ativo"
+        const val FIELD_QUILOMETRAGEM_ULTIMA = "quilometragemUltima"
+        const val FIELD_DATA_ATUALIZACAO = "dataUltimaAtualizacao"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -253,15 +263,20 @@ class DepartureActivity : AppCompatActivity() {
     }
 
     private fun fetchPlates() {
-        firestore.collection("01-placas")
-            .orderBy("placa", Query.Direction.ASCENDING)
+        firestore.collection(COL_VEICULOS)
+            .whereEqualTo(FIELD_CATEGORIA, "PLACA")
+            .orderBy(FIELD_IDENTIFICADOR, Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 platesList.clear()
                 for (document in result) {
-                    val plateNumber = document.getString("placa")
-                    if (plateNumber != null) {
-                        platesList.add(plateNumber)
+                    val isActive = document.getBoolean(FIELD_ATIVO)
+                    if (isActive == false) {
+                        continue
+                    }
+                    val identificador = document.getString(FIELD_IDENTIFICADOR) ?: document.id
+                    if (identificador.isNotBlank()) {
+                        platesList.add(identificador)
                     }
                 }
                 val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, platesList)
@@ -273,26 +288,22 @@ class DepartureActivity : AppCompatActivity() {
     }
 
     private fun fetchLatestKmForPlate(plate: String) {
-        firestore.collection("01-placas")
-            .whereEqualTo("placa", plate)
+        firestore.collection(COL_VEICULOS)
+            .document(plate)
             .get()
-            .addOnSuccessListener { documents ->
-                if (!documents.isEmpty) {
-                    val document = documents.documents[0]
-                    val kmValue = document.getLong("km")
-                    if (kmValue != null) {
-                        val km = kmValue.toInt()
-                        previousKm = km
-                        kmEditText.tag = km
-                        val formattedKm = NumberFormat.getNumberInstance(Locale("pt", "BR")).format(km)
-                        kmEditText.setText(formattedKm)
-                        Log.d("Firestore", "Quilometragem encontrada para $plate: $km")
-                    } else {
-                        Toast.makeText(this, "KM não encontrado para esta placa; insira manualmente.", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this, "Nenhum documento encontrado para esta placa.", Toast.LENGTH_SHORT).show()
+            .addOnSuccessListener { document ->
+                val kmValue = document.getLong(FIELD_QUILOMETRAGEM_ULTIMA)
+                if (!document.exists()) {
+                    Log.w("Firestore", "Veículo não encontrado para identificador: $plate")
+                } else if (kmValue == null) {
+                    Log.w("Firestore", "Campo quilometragemUltima ausente para $plate")
                 }
+                val km = kmValue?.toInt() ?: 0
+                previousKm = km
+                kmEditText.tag = km
+                val formattedKm = NumberFormat.getNumberInstance(Locale("pt", "BR")).format(km)
+                kmEditText.setText(formattedKm)
+                Log.d("Firestore", "Quilometragem encontrada para $plate: $km")
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Erro ao buscar placa: ${exception.message}", Toast.LENGTH_SHORT).show()
@@ -429,23 +440,32 @@ class DepartureActivity : AppCompatActivity() {
             .document(docId)
             .set(departureData)
             .addOnSuccessListener {
-                // Atualiza o campo "km" na coleção "01-placas"
-                firestore.collection("01-placas")
-                    .whereEqualTo("placa", plate)
-                    .get()
-                    .addOnSuccessListener { querySnapshot ->
-                        for (document in querySnapshot) {
-                            firestore.collection("01-placas")
-                                .document(document.id)
-                                .update("km", km)
-                        }
-                    }
+                updateVehicleKm(plate, km)
 
                 Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show()
                 showSuccessOverlay()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Erro ao salvar dados; Tente Novamente!", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun updateVehicleKm(identificador: String, km: Int) {
+        if (identificador.isBlank()) return
+
+        firestore.collection(COL_VEICULOS)
+            .document(identificador)
+            .update(
+                FIELD_QUILOMETRAGEM_ULTIMA,
+                km,
+                FIELD_DATA_ATUALIZACAO,
+                FieldValue.serverTimestamp()
+            )
+            .addOnSuccessListener {
+                Log.d("Firestore", "Quilometragem atualizada em $identificador: $km")
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firestore", "Erro ao atualizar quilometragem em $identificador", e)
             }
     }
 

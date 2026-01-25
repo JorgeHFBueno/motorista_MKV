@@ -92,7 +92,14 @@ class FuelActivity : AppCompatActivity() {
     private val obrasList = mutableListOf<String>()
     private lateinit var obrasAdapter: ArrayAdapter<String>
     private val obraPlaceholder = "Selecione a obra"
-
+    private companion object {
+        const val COL_VEICULOS = "veiculos"
+        const val FIELD_CATEGORIA = "categoria"
+        const val FIELD_IDENTIFICADOR = "identificador"
+        const val FIELD_ATIVO = "ativo"
+        const val FIELD_QUILOMETRAGEM_ULTIMA = "quilometragemUltima"
+        const val FIELD_DATA_ATUALIZACAO = "dataUltimaAtualizacao"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -750,35 +757,28 @@ class FuelActivity : AppCompatActivity() {
     }
 
     private fun fetchPlates() {
-        firestore.collection("01-placas")
-            .orderBy("placa", Query.Direction.ASCENDING)
-            .get()
-            .addOnSuccessListener { result ->
-                platesList.clear()
-                for (document in result) {
-                    val plateNumber = document.getString("placa")
-                    if (plateNumber != null) {
-                        platesList.add(plateNumber)
-                    }
-                }
-                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, platesList)
-                plateAutoComplete.setAdapter(adapter)
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, "Erro recuperando placas: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
+        fetchVehiclesByCategory("PLACA")
     }
 
     private fun fetchPlatesExtra() {
-        firestore.collection("01-placas")
-            .orderBy("extra", Query.Direction.ASCENDING)
+        fetchVehiclesByCategory("EXTRA")
+    }
+
+    private fun fetchVehiclesByCategory(category: String) {
+        firestore.collection(COL_VEICULOS)
+            .whereEqualTo(FIELD_CATEGORIA, category)
+            .orderBy(FIELD_IDENTIFICADOR, Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 platesList.clear()
                 for (document in result) {
-                    val plateNumber = document.getString("extra")
-                    if (plateNumber != null) {
-                        platesList.add(plateNumber)
+                    val isActive = document.getBoolean(FIELD_ATIVO)
+                    if (isActive == false) {
+                        continue
+                    }
+                    val identificador = document.getString(FIELD_IDENTIFICADOR) ?: document.id
+                    if (identificador.isNotBlank()) {
+                        platesList.add(identificador)
                     }
                 }
                 val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, platesList)
@@ -823,28 +823,43 @@ class FuelActivity : AppCompatActivity() {
     }
 
     private fun fetchLatestKmForPlate(plate: String) {
-        firestore.collection("caminhao")
-            .document(plate)
+        firestore.collection(COL_VEICULOS)            .document(plate)
             .get()
             .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val kmValue = document.getLong("km")
-                    if (kmValue != null) {
-                        val km = kmValue.toInt()
-                        previousKm = km
-                        kmEditText.tag = km  // Atualiza o tag para uso na validação
-                        val formattedKm = formatValueWithComma(km)
-                        kmEditText.setText(formattedKm)
-                    } else {
-                        Toast.makeText(this, "KM não encontrado para esta placa; insira manualmente.", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this, "Nenhum caminhão encontrado para esta placa.", Toast.LENGTH_SHORT).show()
+                val kmValue = document.getLong(FIELD_QUILOMETRAGEM_ULTIMA)
+                if (!document.exists()) {
+                    Log.w("Firestore", "Veículo não encontrado para identificador: $plate")
+                } else if (kmValue == null) {
+                    Log.w("Firestore", "Campo quilometragemUltima ausente para $plate")
                 }
+                val km = kmValue?.toInt() ?: 0
+                previousKm = km
+                kmEditText.tag = km  // Atualiza o tag para uso na validação
+                val formattedKm = formatValueWithComma(km)
+                kmEditText.setText(formattedKm)
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Erro ao buscar caminhão: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Erro ao buscar quilometragem: ${exception.message}", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Erro ao buscar quilometragem: ${exception.message}")
+            }
+    }
+
+    private fun updateVehicleKm(identificador: String, km: Int) {
+        if (identificador.isBlank()) return
+
+        firestore.collection(COL_VEICULOS)
+            .document(identificador)
+            .update(
+                FIELD_QUILOMETRAGEM_ULTIMA,
+                km,
+                FIELD_DATA_ATUALIZACAO,
+                FieldValue.serverTimestamp()
+            )
+            .addOnSuccessListener {
+                Log.d("Firestore", "Quilometragem atualizada em $identificador: $km")
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firestore", "Erro ao atualizar quilometragem em $identificador", e)
             }
     }
 
@@ -980,9 +995,9 @@ class FuelActivity : AppCompatActivity() {
         // Se "km" estiver marcado => salva "km" como int
         // Senão => salva "semKm" = "Galão" ou "Sem Odômetro"
         val dataToSave = hashMapOf<String, Any>()
+        val kmInt = kmEditText.tag as? Int ?: 0
 
         if (checkBoxkm.isChecked) {
-            val kmInt = kmEditText.tag as? Int ?: 0
             dataToSave["km"] = kmInt
         } else {
             val semKmValue = when {
@@ -1066,6 +1081,9 @@ class FuelActivity : AppCompatActivity() {
                 ref.document(docId)
                     .set(dataToSave)
                     .addOnSuccessListener {
+                        if (checkBoxkm.isChecked) {
+                            updateVehicleKm(plate, kmInt)
+                        }
                         Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show()
                         showSuccessOverlay()
                     }
@@ -1161,7 +1179,8 @@ class FuelActivity : AppCompatActivity() {
         dataToUpdate["para_quem"] = paraQuemEditText.text.toString()
         dataToUpdate["motivo"]    = motivoEditText.text.toString()
         dataToUpdate["local"]     = localEditText.text.toString()
-        dataToUpdate["placa"]     = plateAutoComplete.text.toString()
+        val identificador = plateAutoComplete.text.toString()
+        dataToUpdate["placa"]     = identificador
         dataToUpdate["arla"]      = (EditTextArla.tag as? Int ?: 0)
         dataToUpdate["obra"]      = obraSpinner.selectedItem?.toString().orEmpty()
 
@@ -1181,6 +1200,10 @@ class FuelActivity : AppCompatActivity() {
             .document(documentId)
             .update(dataToUpdate)
             .addOnSuccessListener {
+                if (checkBoxkm.isChecked) {
+                    val kmAtual = kmEditText.tag as? Int ?: 0
+                    updateVehicleKm(identificador, kmAtual)
+                }
                 Toast.makeText(this, "Documento atualizado com sucesso!", Toast.LENGTH_SHORT).show()
                 showSuccessOverlay()
             }

@@ -247,6 +247,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/textlocal" />
 
             <TextView
+                android:id="@+id/textObra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Obra:"
+                android:textAllCaps="true"
+                android:textColor="@color/azul_escuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/localEditText" />
+
+            <Spinner
+                android:id="@+id/obraSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textObra" />
+
+            <TextView
                 android:id="@+id/motoristaText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -258,7 +281,7 @@
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/localEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/obraSpinner" />
 
             <AutoCompleteTextView
                 android:id="@+id/motoristaEditText"

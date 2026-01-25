@@ -20,6 +20,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ScrollView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -46,6 +47,7 @@ class FuelActivity : AppCompatActivity() {
     private lateinit var paraQuemEditText: AutoCompleteTextView
     private lateinit var motivoEditText: AutoCompleteTextView
     private lateinit var localEditText: AutoCompleteTextView
+    private lateinit var obraSpinner: Spinner
 
     private lateinit var lfAutoCompleteTextView: AutoCompleteTextView
     private lateinit var liEditText: EditText
@@ -87,6 +89,9 @@ class FuelActivity : AppCompatActivity() {
     private var isEdicaoMode = false
     private var docIdToEdit: String? = null
     private lateinit var dateEditText: EditText
+    private val obrasList = mutableListOf<String>()
+    private lateinit var obrasAdapter: ArrayAdapter<String>
+    private val obraPlaceholder = "Selecione a obra"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,6 +110,7 @@ class FuelActivity : AppCompatActivity() {
         paraQuemEditText = findViewById(R.id.paraQuemEditText)
         motivoEditText = findViewById(R.id.motivoEditText)
         localEditText = findViewById(R.id.localEditText)
+        obraSpinner = findViewById(R.id.obraSpinner)
 
         liEditText = findViewById(R.id.liEditText)
         qaEditText = findViewById(R.id.qaEditText)
@@ -229,6 +235,8 @@ class FuelActivity : AppCompatActivity() {
 
         setupEditTextsAndWatchers()
         fetchPlates()
+        setupObraSpinner()
+        fetchObras()
 
         plateAutoComplete.setOnItemClickListener { parent, _, position, _ ->
             val selectedPlate = parent.getItemAtPosition(position).toString()
@@ -282,6 +290,22 @@ class FuelActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        obraSpinner.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: android.widget.AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                (view as? TextView)?.error = null
+                validateFields()
+            }
+
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
+                validateFields()
+            }
+        }
 
         checkBoxExtra.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -765,6 +789,39 @@ class FuelActivity : AppCompatActivity() {
             }
     }
 
+    private fun setupObraSpinner() {
+        obrasList.clear()
+        obrasList.add(obraPlaceholder)
+        obrasAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, obrasList)
+        obrasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        obraSpinner.adapter = obrasAdapter
+    }
+
+    private fun fetchObras() {
+        firestore.collection("obras")
+            .orderBy("nome", Query.Direction.ASCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                obrasList.clear()
+                obrasList.add(obraPlaceholder)
+
+                result.documents.mapNotNull { it.getString("nome") }
+                    .forEach { obrasList.add(it) }
+
+                obrasAdapter.notifyDataSetChanged()
+
+                if (obrasList.size == 1) {
+                    Toast.makeText(this, "Nenhuma obra encontrada.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                obrasList.clear()
+                obrasList.add(obraPlaceholder)
+                obrasAdapter.notifyDataSetChanged()
+                Toast.makeText(this, "Erro ao carregar obras: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun fetchLatestKmForPlate(plate: String) {
         firestore.collection("caminhao")
             .document(plate)
@@ -803,8 +860,13 @@ class FuelActivity : AppCompatActivity() {
                 dieselEditText.error = null
             }
 
+            val isObraValid = isObraSelected()
+            if (!isObraValid) {
+                (obraSpinner.selectedView as? TextView)?.error = "Selecione uma obra."
+            }
+
             // Se Diesel é válido, podemos habilitar o botão
-            val allFieldsValid = isDieselValid
+            val allFieldsValid = isDieselValid && isObraValid
             saveButton.isEnabled = allFieldsValid
             val color = if (allFieldsValid) {
                 ContextCompat.getColor(this, R.color.azul_escuro)
@@ -866,6 +928,7 @@ class FuelActivity : AppCompatActivity() {
         val isParaQuemValid = paraQuemEditText.text.toString().isNotEmpty()
         val isMotivoValid = motivoEditText.text.toString().isNotEmpty()
         val isLocalValid = localEditText.text.toString().isNotEmpty()
+        val isObraValid = isObraSelected()
 
         if (!isParaQuemValid) {
             paraQuemEditText.error = "Preencha este campo."
@@ -882,6 +945,9 @@ class FuelActivity : AppCompatActivity() {
         } else {
             localEditText.error = null
         }
+        if (!isObraValid) {
+            (obraSpinner.selectedView as? TextView)?.error = "Selecione uma obra."
+        }
 
         // Verifica se a placa foi selecionada
         val plateInput = plateAutoComplete.text.toString()
@@ -897,7 +963,7 @@ class FuelActivity : AppCompatActivity() {
 
         // Consolida a validação
         val allFieldsValid = isKmValid && isLiValid && isQaValid && isLfValid &&
-                isParaQuemValid && isMotivoValid && isLocalValid && isPlateValid && isCheckboxSelected
+                isParaQuemValid && isMotivoValid && isLocalValid && isObraValid && isPlateValid && isCheckboxSelected
 
         // Habilita/Desabilita o botão e altera a cor de fundo
         saveButton.isEnabled = allFieldsValid
@@ -939,6 +1005,7 @@ class FuelActivity : AppCompatActivity() {
         val motivo = motivoEditText.text.toString()
         val local = localEditText.text.toString()
         val plate = plateAutoComplete.text.toString()
+        val obra = obraSpinner.selectedItem?.toString().orEmpty()
 
         val currentUser = auth.currentUser
         //val currentDate = Date()
@@ -955,6 +1022,7 @@ class FuelActivity : AppCompatActivity() {
         dataToSave["local"] = local
         dataToSave["placa"] = plate
         dataToSave["arla"] = arla
+        dataToSave["obra"] = obra
 
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val adminStatus = sharedPreferences.getString("adminStatus", "user")
@@ -1023,6 +1091,7 @@ class FuelActivity : AppCompatActivity() {
         dataToSave["motorista"] = finalEmail ?: "ERROR"
         dataToSave["motivo"] = "Abastecimento de Diesel"
         dataToSave["lf"] = lf
+        dataToSave["obra"] = obraSpinner.selectedItem?.toString().orEmpty()
 
         // Formata a data para usar como parte do ID
         val dateFormat = SimpleDateFormat("dd_MM_yy - HHmm-ss", Locale.getDefault())
@@ -1094,6 +1163,7 @@ class FuelActivity : AppCompatActivity() {
         dataToUpdate["local"]     = localEditText.text.toString()
         dataToUpdate["placa"]     = plateAutoComplete.text.toString()
         dataToUpdate["arla"]      = (EditTextArla.tag as? Int ?: 0)
+        dataToUpdate["obra"]      = obraSpinner.selectedItem?.toString().orEmpty()
 
         // data escolhida ou agora
         val chosenDate = dateEditText.tag as? Date ?: Date()
@@ -1156,5 +1226,10 @@ class FuelActivity : AppCompatActivity() {
         // Cria um novo contexto com essa configuração
         val context = newBase.createConfigurationContext(overrideConfig)
         super.attachBaseContext(context)
+    }
+
+    private fun isObraSelected(): Boolean {
+        val selected = obraSpinner.selectedItem?.toString()?.trim().orEmpty()
+        return selected.isNotEmpty() && selected != obraPlaceholder
     }
 }

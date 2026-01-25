@@ -37,6 +37,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 import com.google.firebase.firestore.FieldValue
+import java.text.DecimalFormat
 
 class DepartureActivity : AppCompatActivity() {
 
@@ -104,44 +105,6 @@ class DepartureActivity : AppCompatActivity() {
                 enableAllButtons()
             }, 2500) // Reativa após X segundo
             finish() // Finaliza a Activity atual para não deixá-la na pilha
-        }
-
-        // Adicionando TextWatcher para formatar o campo kmEditText e validar o valor
-        kmEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                val input = s.toString().replace("[^0-9]".toRegex(), "")
-                val newKm = input.toIntOrNull() ?: 0
-
-                // Validate the input against the previous value
-                if (newKm < previousKm) {
-                    kmEditText.error = "A quilometragem deve ser maior ou igual a ${
-                        NumberFormat.getNumberInstance(Locale("pt", "BR")).format(previousKm)
-                    }"
-                } else {
-                    currentKm = newKm // Update the current value
-                    kmEditText.error = null // Clear error if valid
-                }
-            }
-        })
-
-        kmEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                // Format the value on losing focus
-                val formattedKm =
-                    NumberFormat.getNumberInstance(Locale("pt", "BR")).format(currentKm)
-                kmEditText.setText(formattedKm)
-            } else {
-                // Restore the raw value on gaining focus
-                val rawKm = currentKm.toString()
-                kmEditText.setText(rawKm)
-            }
-
-            // Ensure the cursor is at the end of the text
-            kmEditText.setSelection(kmEditText.text.length)
         }
 
         // Fetch plates and set up the spinner
@@ -237,8 +200,7 @@ class DepartureActivity : AppCompatActivity() {
                     .replace("[^0-9]".toRegex(), "")
                     .toIntOrNull() ?: 0
                 kmEditText.tag = rawValue
-                val formattedKm =
-                    NumberFormat.getNumberInstance(Locale("pt", "BR")).format(rawValue)
+                val formattedKm = formatKmValue(rawValue)
                 kmEditText.setText(formattedKm)
             } else {
                 val rawValue = (kmEditText.tag as? Int)?.toString() ?: ""
@@ -260,6 +222,17 @@ class DepartureActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+    }
+
+    private fun formatKmValue(rawValue: Int): String {
+        // Se queremos a última casa como decimal, dividimos por 10.0
+        val decimalValue = rawValue / 10.0
+
+        // Usa DecimalFormat em Locale PT-BR com 1 casa decimal
+        val numberFormat = NumberFormat.getNumberInstance(Locale("pt", "BR")) as java.text.DecimalFormat
+        numberFormat.applyPattern("#,###.0")  // 1 casa decimal
+
+        return numberFormat.format(decimalValue)
     }
 
     private fun fetchPlates() {
@@ -301,8 +274,7 @@ class DepartureActivity : AppCompatActivity() {
                 val km = kmValue?.toInt() ?: 0
                 previousKm = km
                 kmEditText.tag = km
-                val formattedKm = NumberFormat.getNumberInstance(Locale("pt", "BR")).format(km)
-                kmEditText.setText(formattedKm)
+                kmEditText.setText(formatKmValue(previousKm))
                 Log.d("Firestore", "Quilometragem encontrada para $plate: $km")
             }
             .addOnFailureListener { exception ->
@@ -345,9 +317,7 @@ class DepartureActivity : AppCompatActivity() {
         val kmValue = (kmEditText.tag as? Int) ?: 0
         val isKmValid = kmValue >= previousKm && kmValue > 0
         if (!isKmValid) {
-            kmEditText.error = "A quilometragem deve ser maior que ${
-                NumberFormat.getNumberInstance(Locale("pt", "BR")).format(previousKm)
-            }"
+            kmEditText.error = "A quilometragem deve ser igual OU maior que ${formatKmValue(previousKm)}"
         } else {
             kmEditText.error = null
         }

@@ -23,6 +23,8 @@ import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.util.Log
+import com.example.motorista_mkv.data.BombasRepository
 
 class AdmActivity : AppCompatActivity() {
 
@@ -127,62 +129,81 @@ class AdmActivity : AppCompatActivity() {
                             val novaLitragemStr = inputEditText.text.toString().trim()
                             val novaLitragem = novaLitragemStr.toIntOrNull() ?: 0
 
-                            // Query Firestore para buscar a última litragem registrada
-                            val query = firestore.collection("03-combustivel")
-                                .orderBy("data", Query.Direction.DESCENDING)
-                                .limit(1)
+                            fun handleVerification(ultimaLitragem: Int, folga: Int) {
+                                val diferencial = novaLitragem - ultimaLitragem
 
-                            query.get()
-                                .addOnSuccessListener { querySnapshot ->
-                                    if (!querySnapshot.isEmpty) {
-                                        val document = querySnapshot.documents[0]
-                                        val ultimaLitragem = document.getLong("lf")?.toInt() ?: 0
-                                        val diferencial = novaLitragem - ultimaLitragem
+                                if (kotlin.math.abs(novaLitragem - ultimaLitragem) <= folga) {
+                                    val intent = Intent(this, FuelActivity::class.java)
+                                    startActivity(intent)
+                                } else {
+                                    val chamado = hashMapOf(
+                                        "data" to Date(),
+                                        "motorista" to currentUser.uid,
+                                        "status" to "ABERTO",
+                                        "tipo" to "Conflito no Montante",
+                                        "mntntInfrmd" to novaLitragem,
+                                        "montanteInicial" to ultimaLitragem,
+                                        "dfrncl" to diferencial
+                                    )
 
-                                        // Se a diferença for pequena (até 9 unidades), abre a FuelActivity normalmente
-                                        if (kotlin.math.abs(novaLitragem - ultimaLitragem) <= 15) {
-                                            val intent = Intent(this, FuelActivity::class.java)
+                                    val dateFormat = SimpleDateFormat("dd_MM_yy - HHmm", Locale.getDefault())
+                                    val dateStr = dateFormat.format(Date())
+                                    val tipo = "Conflito no Montante"
+                                    val motorista = currentUser.uid
+                                    val documentId = "$dateStr $tipo - $motorista"
+
+                                    firestore.collection("00-chamados")
+                                        .document(documentId)
+                                        .set(chamado)
+                                        .addOnSuccessListener {
+                                            val intent = Intent(this, ConflitoActivity::class.java)
+                                            intent.putExtra("DOCUMENT_ID", documentId)
+                                            intent.putExtra("DIFERENCIAL", diferencial)
+                                            intent.putExtra("LITRAGEM_NOVA", novaLitragem)
                                             startActivity(intent)
-                                        } else {
-                                            // Caso a diferença seja maior, cria um chamado de conflito
-                                            val chamado = hashMapOf(
-                                                "data" to Date(),
-                                                "motorista" to currentUser.uid,
-                                                "status" to "ABERTO",
-                                                "tipo" to "Conflito no Montante",
-                                                "mntntInfrmd" to novaLitragem,
-                                                "montanteInicial" to ultimaLitragem,
-                                                "dfrncl" to diferencial
-                                            )
-
-                                            val dateFormat = SimpleDateFormat("dd_MM_yy - HHmm", Locale.getDefault())
-                                            val dateStr = dateFormat.format(Date())
-                                            val tipo = "Conflito no Montante"
-                                            val motorista = currentUser.uid
-                                            val documentId = "$dateStr $tipo - $motorista"
-
-                                            firestore.collection("00-chamados")
-                                                .document(documentId)  // Define o ID do documento
-                                                .set(chamado)
-                                                .addOnSuccessListener {
-                                                    val intent = Intent(this, ConflitoActivity::class.java)
-                                                    intent.putExtra("DOCUMENT_ID", documentId)
-                                                    intent.putExtra("DIFERENCIAL", diferencial)
-                                                    intent.putExtra("LITRAGEM_NOVA", novaLitragem)
-                                                    startActivity(intent)
-                                                }
-                                                .addOnFailureListener { e ->
-                                                    e.printStackTrace()
-                                                }
                                         }
-                                        dialog.dismiss()
-                                    } else {
-                                        Toast.makeText(this, "Nenhum registro encontrado!", Toast.LENGTH_SHORT).show()
+                                        .addOnFailureListener { e ->
+                                            e.printStackTrace()
+                                        }
+                                }
+                                dialog.dismiss()
+                            }
+
+                            fun runFallbackQuery() {
+                                val query = firestore.collection("03-combustivel")
+                                    .orderBy("data", Query.Direction.DESCENDING)
+                                    .limit(1)
+
+                                query.get()
+                                    .addOnSuccessListener { querySnapshot ->
+                                        if (!querySnapshot.isEmpty) {
+                                            val document = querySnapshot.documents[0]
+                                            val ultimaLitragem = document.getLong("lf")?.toInt() ?: 0
+                                            handleVerification(ultimaLitragem, 15)
+                                        } else {
+                                            Toast.makeText(this, "Nenhum registro encontrado!", Toast.LENGTH_SHORT).show()
+                                        }
+
                                     }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Erro ao buscar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+
+                            BombasRepository.fetchMontanteFolga(
+                                firestore = firestore,
+                                onSuccess = { montanteAtual, folgaLitros ->
+                                    handleVerification(montanteAtual.toInt(), folgaLitros.toInt())
+                                },
+                                onFailure = { exception ->
+                                    Log.w(
+                                        "AdmActivity",
+                                        "Falha ao ler bombas/diesel_patio, usando fallback.",
+                                        exception
+                                    )
+                                    runFallbackQuery()
                                 }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(this, "Erro ao buscar dados: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
+                            )
                         }
                         // Listener do botão "Cancelar"
                         btnCancelar.setOnClickListener {

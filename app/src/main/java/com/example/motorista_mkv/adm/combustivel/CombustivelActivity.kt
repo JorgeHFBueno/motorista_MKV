@@ -20,6 +20,7 @@ import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.example.motorista_mkv.data.BombasRepository
 
 class CombustivelActivity : AppCompatActivity() {
 
@@ -71,6 +72,39 @@ class CombustivelActivity : AppCompatActivity() {
 
         Log.d("DEBUG_ADMIN", "AdminStatus: $adminStatus")
 
+        var historyDieselValue: Long? = null
+        var historyLoaded = false
+        var bombasResolved = false
+        var bombasUsed = false
+
+        fun applyFallbackDieselIfReady() {
+            if (bombasResolved && !bombasUsed && historyLoaded) {
+                historyDieselValue?.let {
+                    tvDiesel.text = formatDiesel(it)
+                } ?: run {
+                    tvDiesel.text = "Nenhum documento encontrado"
+                }
+            }
+        }
+
+        BombasRepository.fetchEstoqueAtual(
+            firestore = firestore,
+            onSuccess = { estoqueAtual ->
+                bombasResolved = true
+                bombasUsed = true
+                tvDiesel.text = formatDiesel(estoqueAtual)
+            },
+            onFailure = { exception ->
+                bombasResolved = true
+                Log.w(
+                    "CombustivelActivity",
+                    "Falha ao ler bombas/diesel_patio, usando fallback.",
+                    exception
+                )
+                applyFallbackDieselIfReady()
+            }
+        )
+
         // Exemplo de query com ordenação pela data desc
         val query = firestore.collection("03-combustivel")
             .orderBy("data", Query.Direction.DESCENDING)
@@ -80,12 +114,10 @@ class CombustivelActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 if (!result.isEmpty) {
                     val latestDoc = result.documents[0]
-                    val dieselValue = latestDoc.getLong("diesel") ?: 0L
-
-                    tvDiesel.text = formatDiesel(dieselValue)
-                } else {
-                    tvDiesel.text = "Nenhum documento encontrado"
+                    historyDieselValue = latestDoc.getLong("diesel") ?: 0L
                 }
+                historyLoaded = true
+                applyFallbackDieselIfReady()
 
                 bombList.clear()
                     for (document in result) {

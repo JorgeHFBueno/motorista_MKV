@@ -36,6 +36,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import com.example.motorista_mkv.data.BombasRepository
 
 class FuelActivity : AppCompatActivity() {
 
@@ -458,32 +459,46 @@ class FuelActivity : AppCompatActivity() {
     }
 
     private fun fetchLastLfFromFirestore() {
-        val query = firestore.collection("03-combustivel")
-            .orderBy("data", Query.Direction.DESCENDING)
-            .limit(1)
+        fun handleMontante(ultimaLitragem: Int) {
+            ultimaLitragemFirestore = ultimaLitragem
+            liEditText.tag = ultimaLitragemFirestore
+            liEditText.setText(formatValueWithComma(ultimaLitragemFirestore))
+            calculateFinalLiters()
+            validateFields()
+        }
 
-        query.get()
-            .addOnSuccessListener { querySnapshot ->
-                if (!querySnapshot.isEmpty) {
-                    val document = querySnapshot.documents[0]
-                    // Aqui definimos a variável global 'ultimaLitragemFirestore'
-                    ultimaLitragemFirestore = document.getLong("lf")?.toInt() ?: 0
+        fun runFallbackQuery() {
+            val query = firestore.collection("03-combustivel")
+                .orderBy("data", Query.Direction.DESCENDING)
+                .limit(1)
 
-                    // Preenche 'liEditText' com esse valor
-                    liEditText.tag = ultimaLitragemFirestore
-                    liEditText.setText(formatValueWithComma(ultimaLitragemFirestore))
-
-                    // Recalcula LF, pois LI mudou
-                    calculateFinalLiters()
-                    // Força a validação após atualizar o campo
-                    validateFields()
-                } else {
-                    Toast.makeText(this, "Nenhum registro encontrado no combustivel!", Toast.LENGTH_SHORT).show()
+            query.get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        val document = querySnapshot.documents[0]
+                        handleMontante(document.getLong("lf")?.toInt() ?: 0)
+                    } else {
+                        Toast.makeText(this, "Nenhum registro encontrado no combustivel!", Toast.LENGTH_SHORT).show()
+                    }
                 }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Erro ao buscar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+        BombasRepository.fetchMontanteAtual(
+            firestore = firestore,
+            onSuccess = { montanteAtual ->
+                handleMontante(montanteAtual.toInt())
+            },
+            onFailure = { exception ->
+                Log.w(
+                    "FuelActivity",
+                    "Falha ao ler bombas/diesel_patio, usando fallback.",
+                    exception
+                )
+                runFallbackQuery()
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Erro ao buscar dados: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        )
     }
 
     private fun checkAuthorization() {
@@ -1059,41 +1074,31 @@ class FuelActivity : AppCompatActivity() {
         val docId = "$dateStr $finalEmail"
 
         val ref = firestore.collection("03-combustivel")
-        // 1) Buscar o último documento (ordem decrescente, limitando a 1)
-        ref.orderBy("data", Query.Direction.DESCENDING)
-            .limit(1)
-            .get()
-            .addOnSuccessListener { snapshot ->
-                // 2) Obter o último diesel; se não existir documento algum, considere 0
-                val lastDiesel = if (!snapshot.isEmpty) {
-                    snapshot.documents[0].getLong("diesel")?.toInt() ?: 0
-                } else {
-                    0
-                }
-
-                // 3) Subtrair o "qa" do último diesel para gerar o novo diesel
+        fetchCurrentDiesel(
+            onSuccess = { lastDiesel ->
                 val newDieselValue = lastDiesel - qa
 
-                // 4) Adicionar ao mapa dataToSave
                 dataToSave["diesel"] = newDieselValue
 
-                // 5) Salvar o novo documento
                 ref.document(docId)
                     .set(dataToSave)
                     .addOnSuccessListener {
                         if (checkBoxkm.isChecked) {
                             updateVehicleKm(plate, kmInt)
                         }
+                        val motorista = dataToSave["motorista"] as? String ?: "ERROR"
+                        updateBombasAfterSave(lf, newDieselValue, motorista, chosenDate)
                         Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show()
                         showSuccessOverlay()
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, "Erro ao salvar dados; Tente novamente!", Toast.LENGTH_SHORT).show()
                     }
-            }
-            .addOnFailureListener {
+            },
+            onFailure = {
                 Toast.makeText(this, "Erro ao buscar último diesel; Tente novamente!", Toast.LENGTH_SHORT).show()
             }
+        )
     }
     private fun saveFuel2() {
         val dataToSave = hashMapOf<String, Any>()
@@ -1120,39 +1125,30 @@ class FuelActivity : AppCompatActivity() {
         val docId = "$dateStr $finalEmail"
 
         val ref = firestore.collection("03-combustivel")
-        // 1) Buscar o último documento (ordem decrescente, limitando a 1)
-        ref.orderBy("data", Query.Direction.DESCENDING)
-            .limit(1)
-            .get()
-            .addOnSuccessListener { snapshot ->
-                // 2) Obter o último diesel; se não existir documento algum, considere 0
-                val lastDiesel = if (!snapshot.isEmpty) {
-                    snapshot.documents[0].getLong("diesel")?.toInt() ?: 0
-                } else {
-                    0
-                }
+        fetchCurrentDiesel(
+            onSuccess = { lastDiesel ->
                 val dieselABS = dieselEditText.tag as? Int ?: 0
-                // 3) Subtrair o "qa" do último diesel para gerar o novo diesel
                 val newDieselValue = lastDiesel + dieselABS
 
-                // 4) Adicionar ao mapa dataToSave
                 dataToSave["qa"] = dieselABS
                 dataToSave["diesel"] = newDieselValue
 
-                // 5) Salvar o novo documento
                 ref.document(docId)
                     .set(dataToSave)
                     .addOnSuccessListener {
+                        val motorista = dataToSave["motorista"] as? String ?: "ERROR"
+                        updateBombasAfterSave(lf, newDieselValue, motorista, chosenDate)
                         Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show()
                         showSuccessOverlay()
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, "Erro ao salvar dados; Tente novamente!", Toast.LENGTH_SHORT).show()
                     }
-            }
-            .addOnFailureListener {
+            },
+            onFailure = {
                 Toast.makeText(this, "Erro ao buscar último diesel; Tente novamente!", Toast.LENGTH_SHORT).show()
             }
+        )
     }
 
     private fun updateFuel(documentId: String) {
@@ -1254,5 +1250,62 @@ class FuelActivity : AppCompatActivity() {
     private fun isObraSelected(): Boolean {
         val selected = obraSpinner.selectedItem?.toString()?.trim().orEmpty()
         return selected.isNotEmpty() && selected != obraPlaceholder
+    }
+    private fun fetchCurrentDiesel(onSuccess: (Int) -> Unit, onFailure: () -> Unit) {
+        fun runFallbackQuery() {
+            val ref = firestore.collection("03-combustivel")
+            ref.orderBy("data", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener { snapshot ->
+                    val lastDiesel = if (!snapshot.isEmpty) {
+                        snapshot.documents[0].getLong("diesel")?.toInt() ?: 0
+                    } else {
+                        0
+                    }
+                    onSuccess(lastDiesel)
+                }
+                .addOnFailureListener {
+                    onFailure()
+                }
+        }
+
+        BombasRepository.fetchEstoqueAtual(
+            firestore = firestore,
+            onSuccess = { estoqueAtual ->
+                onSuccess(estoqueAtual.toInt())
+            },
+            onFailure = { exception ->
+                Log.w(
+                    "FuelActivity",
+                    "Falha ao ler bombas/diesel_patio, usando fallback.",
+                    exception
+                )
+                runFallbackQuery()
+            }
+        )
+    }
+
+    private fun updateBombasAfterSave(
+        montanteAtual: Int,
+        estoqueAtual: Int,
+        ultimoFrentista: String,
+        ultimoAbastecimento: Date
+    ) {
+        BombasRepository.updateDieselPatio(
+            firestore = firestore,
+            montanteAtual = montanteAtual,
+            estoqueAtual = estoqueAtual,
+            ultimoFrentista = ultimoFrentista,
+            ultimoAbastecimento = ultimoAbastecimento,
+            onSuccess = { },
+            onFailure = { exception ->
+                Log.w(
+                    "FuelActivity",
+                    "Falha ao atualizar bombas/diesel_patio após salvar abastecimento.",
+                    exception
+                )
+            }
+        )
     }
 }

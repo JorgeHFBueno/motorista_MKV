@@ -17,6 +17,7 @@ import com.example.motorista_mkv.adm.combustivel.FuelActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import java.util.Date
+import com.example.motorista_mkv.data.BombasRepository
 
 class ConflitoMontanteActivity : AppCompatActivity() {
 
@@ -209,67 +210,88 @@ class ConflitoMontanteActivity : AppCompatActivity() {
                 )
 
                 val ref = db.collection("03-combustivel")
-                ref.orderBy("data", Query.Direction.DESCENDING)
-                    .limit(1)
-                    .get()
-                    .addOnSuccessListener { snapshot ->
-                        val lastDiesel = if (!snapshot.isEmpty) {
-                            snapshot.documents[0].getLong("diesel")?.toInt() ?: 0
-                        } else {
-                            0
+                fun handleDiesel(lastDiesel: Int) {
+                    val newDieselValue = lastDiesel + dfrncl
+                    dataToSave["diesel"] = newDieselValue
+
+                    val dateFormat = SimpleDateFormat("dd_MM_yy - HHmm-ss", Locale.getDefault())
+                    val dateStr = dateFormat.format(Date())
+                    val docId = "$dateStr $motorista"
+
+                    ref.document(docId).set(dataToSave)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                this,
+                                "Registrado na tabela 03-combustivel com sucesso!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.d("LiberarChamado", "Documento salvo com ID: $docId")
+                            // Atualiza o status do chamado para LIBERADO
+                            chamadoRef.update("status", "LIBERADO")
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Chamado atualizado para LIBERADO!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    enableAllButtons()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Erro ao atualizar status para LIBERADO",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    enableAllButtons()
+                                }
                         }
-                        val newDieselValue = lastDiesel + dfrncl
-                        dataToSave["diesel"] = newDieselValue
+                        .addOnFailureListener { e ->
+                            Toast.makeText(
+                                this,
+                                "Erro ao salvar dados em 03-combustivel",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.e("LiberarChamado", "Erro ao salvar: ", e)
+                            enableAllButtons()
+                        }
+                }
 
-                        val dateFormat = SimpleDateFormat("dd_MM_yy - HHmm-ss", Locale.getDefault())
-                        val dateStr = dateFormat.format(Date())
-                        val docId = "$dateStr $motorista"
+                fun runFallbackQuery() {
+                    ref.orderBy("data", Query.Direction.DESCENDING)
+                        .limit(1)
+                        .get()
+                        .addOnSuccessListener { snapshot ->
+                            val lastDiesel = if (!snapshot.isEmpty) {
+                                snapshot.documents[0].getLong("diesel")?.toInt() ?: 0
+                            } else {
+                                0
+                            }
+                            handleDiesel(lastDiesel)
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                this,
+                                "Erro ao buscar último diesel; Tente novamente!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            enableAllButtons()
+                        }
+                }
 
-                        ref.document(docId).set(dataToSave)
-                            .addOnSuccessListener {
-                                Toast.makeText(
-                                    this,
-                                    "Registrado na tabela 03-combustivel com sucesso!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                Log.d("LiberarChamado", "Documento salvo com ID: $docId")
-                                // Atualiza o status do chamado para LIBERADO
-                                chamadoRef.update("status", "LIBERADO")
-                                    .addOnSuccessListener {
-                                        Toast.makeText(
-                                            this,
-                                            "Chamado atualizado para LIBERADO!",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        enableAllButtons()
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(
-                                            this,
-                                            "Erro ao atualizar status para LIBERADO",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        enableAllButtons()
-                                    }
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(
-                                    this,
-                                    "Erro ao salvar dados em 03-combustivel",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                Log.e("LiberarChamado", "Erro ao salvar: ", e)
-                                enableAllButtons()
-                            }
+                BombasRepository.fetchEstoqueAtual(
+                    firestore = db,
+                    onSuccess = { estoqueAtual ->
+                        handleDiesel(estoqueAtual.toInt())
+                    },
+                    onFailure = { exception ->
+                        Log.w(
+                            "ConflitoMontanteActivity",
+                            "Falha ao ler bombas/diesel_patio, usando fallback.",
+                            exception
+                        )
+                        runFallbackQuery()
                     }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(
-                            this,
-                            "Erro ao buscar último diesel; Tente novamente!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        enableAllButtons()
-                    }
+                )
             } else {
                 Toast.makeText(this, "Chamado inexistente.", Toast.LENGTH_SHORT).show()
                 enableAllButtons()

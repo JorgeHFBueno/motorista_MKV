@@ -18,6 +18,7 @@ import com.google.firebase.firestore.Query
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.motorista_mkv.data.BombasRepository
 
 class EditCombustivelActivity : AppCompatActivity() {
     private companion object {
@@ -645,35 +646,52 @@ class EditCombustivelActivity : AppCompatActivity() {
                         // 3) Agora atualiza o documento original na coleção "03-combustivel"
                         // 3) Se QA mudou, busca o último doc (ignora este) para pegar o diesel e recalcular
                         if (qaAlterado) {
-                            firestore.collection("03-combustivel")
-                                .orderBy("data", Query.Direction.DESCENDING)
-                                .whereNotEqualTo("__name__", documentId!!)  // ignora o doc atual
-                                .limit(1)
-                                .get()
-                                .addOnSuccessListener { snapshot ->
-                                    val lastDiesel = if (!snapshot.isEmpty) {
-                                        snapshot.documents[0].getLong("diesel") ?: 0L
-                                    } else {
-                                        0L
+                            fun applyDiesel(lastDiesel: Long) {
+                                val newDiesel = lastDiesel - newQa
+                                updatedData["diesel"] = newDiesel
+
+                                docRef.update(updatedData)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(this, "Documento atualizado!", Toast.LENGTH_SHORT).show()
+                                        showSuccessOverlay()
                                     }
-
-                                    // Novo diesel = diesel do último doc - novo QA
-                                    val newDiesel = lastDiesel - newQa
-                                    updatedData["diesel"] = newDiesel
-
-                                    // 4) Atualiza no Firestore
-                                    docRef.update(updatedData)
-                                        .addOnSuccessListener {
-                                            Toast.makeText(this, "Documento atualizado!", Toast.LENGTH_SHORT).show()
-                                            showSuccessOverlay()
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Erro ao atualizar: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                            fun runFallbackQuery() {
+                                firestore.collection("03-combustivel")
+                                    .orderBy("data", Query.Direction.DESCENDING)
+                                    .whereNotEqualTo("__name__", documentId!!)  // ignora o doc atual
+                                    .limit(1)
+                                    .get()
+                                    .addOnSuccessListener { snapshot ->
+                                        val lastDiesel = if (!snapshot.isEmpty) {
+                                            snapshot.documents[0].getLong("diesel") ?: 0L
+                                        } else {
+                                            0L
                                         }
-                                        .addOnFailureListener { e ->
-                                            Toast.makeText(this, "Erro ao atualizar: ${e.message}", Toast.LENGTH_SHORT).show()
-                                        }
+                                        applyDiesel(lastDiesel)
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Erro ao buscar último diesel: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+
+                            BombasRepository.fetchEstoqueAtual(
+                                firestore = firestore,
+                                onSuccess = { estoqueAtual ->
+                                    applyDiesel(estoqueAtual)
+                                },
+                                onFailure = { exception ->
+                                    Log.w(
+                                        "EditCombustivelActivity",
+                                        "Falha ao ler bombas/diesel_patio, usando fallback.",
+                                        exception
+                                    )
+                                    runFallbackQuery()
                                 }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(this, "Erro ao buscar último diesel: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
+                            )
                         } else {
                             // Se QA não mudou, simplesmente mantém o diesel original e atualiza os demais campos
                             updatedData["diesel"] = oldDiesel

@@ -15,6 +15,8 @@ import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.util.Log
+import com.example.motorista_mkv.data.BombasRepository
 
 class ConflitoActivity : AppCompatActivity() {
 
@@ -136,52 +138,67 @@ class ConflitoActivity : AppCompatActivity() {
         progressDialog.setMessage("Verificando dados...")
         progressDialog.show()
 
-        val query = firestore.collection("03-combustivel")
-            .orderBy("data", Query.Direction.DESCENDING)
-            .limit(1)
+        fun handleVerification(ultimaLitragem: Int, ultimaDataDate: Date?) {
+            val formatador = java.text.SimpleDateFormat("dd/MM HH:mm", Locale.getDefault())
+            val dataFormatada = if (ultimaDataDate != null) {
+                formatador.format(ultimaDataDate)
+            } else {
+                "Data não disponível"
+            }
+            dataUltimoRegistroTextView.text = "Data do último registro: $dataFormatada"
 
-        query.get()
-            .addOnSuccessListener { querySnapshot ->
-                progressDialog.dismiss()
-                if (!querySnapshot.isEmpty) {
-                    val document = querySnapshot.documents[0]
-                    val ultimaLitragem = document.getLong("lf")?.toInt() ?: 0
+            val diferenca = kotlin.math.abs(novaLitragem - ultimaLitragem)
+            if (diferenca <= 9) {
+                val intent = Intent(this, FuelActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Diferença ainda muito alta! (Diferença = ${formatValueWithComma(diferenca)} L)",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
-                    // ----> Captura a data do documento (campo "data") <----
-                    val ultimaDataTimestamp = document.getTimestamp("data")
-                    val ultimaDataDate = ultimaDataTimestamp?.toDate()
+        fun runFallbackQuery() {
+            val query = firestore.collection("03-combustivel")
+                .orderBy("data", Query.Direction.DESCENDING)
+                .limit(1)
 
-                    // Formata a data (dd/MM/yyyy HH:mm, por exemplo)
-                    val formatador = java.text.SimpleDateFormat("dd/MM HH:mm", Locale.getDefault())
-                    val dataFormatada = if (ultimaDataDate != null) {
-                        formatador.format(ultimaDataDate)
+            query.get()
+                .addOnSuccessListener { querySnapshot ->
+                    progressDialog.dismiss()
+                    if (!querySnapshot.isEmpty) {
+                        val document = querySnapshot.documents[0]
+                        val ultimaLitragem = document.getLong("lf")?.toInt() ?: 0
+                        val ultimaDataDate = document.getTimestamp("data")?.toDate()
+                        handleVerification(ultimaLitragem, ultimaDataDate)
                     } else {
-                        "Data não disponível"
+                        Toast.makeText(this, "Nenhum dado encontrado em 03-combustivel.", Toast.LENGTH_SHORT).show()
                     }
-                    // Exibe a data num TextView
-                    dataUltimoRegistroTextView.text = "Data do último registro: $dataFormatada"
-
-                    val diferenca = kotlin.math.abs(novaLitragem - ultimaLitragem)
-                    if (diferenca <= 9) {
-                        // Se agora a diferença estiver ok, abre FuelActivity
-                        val intent = Intent(this, FuelActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            "Diferença ainda muito alta! (Diferença = ${formatValueWithComma(diferenca)} L)",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } else {
-                    Toast.makeText(this, "Nenhum dado encontrado em 03-combustivel.", Toast.LENGTH_SHORT).show()
                 }
-            }
-            .addOnFailureListener { e ->
+                .addOnFailureListener { e ->
+                    progressDialog.dismiss()
+                    Toast.makeText(this, "Falha ao buscar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        BombasRepository.fetchMontanteAtualComUltimoAbastecimento(
+            firestore = firestore,
+            onSuccess = { montanteAtual, ultimoAbastecimento ->
                 progressDialog.dismiss()
-                Toast.makeText(this, "Falha ao buscar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                handleVerification(montanteAtual.toInt(), ultimoAbastecimento)
+            },
+            onFailure = { exception ->
+                Log.w(
+                    "ConflitoActivity",
+                    "Falha ao ler bombas/diesel_patio, usando fallback.",
+                    exception
+                )
+                runFallbackQuery()
             }
+        )
     }
 
 }

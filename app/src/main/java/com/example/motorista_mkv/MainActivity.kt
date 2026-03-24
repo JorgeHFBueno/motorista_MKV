@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var histButton: Button
     private lateinit var feedbackButton: Button
     private lateinit var welcomeTextView: TextView
-    private lateinit var versionTextView: TextView
+    private var appVersionLabel: String = ""
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         arrivalButton = findViewById(R.id.arrivalButton)
         admButton = findViewById(R.id.admButton)
         welcomeTextView = findViewById(R.id.welcomeTextView)
-        versionTextView = findViewById(R.id.versionTextView)
         fuelButton = findViewById(R.id.fuelButton)
         logoutButton = findViewById(R.id.logoutButton)
         histButton = findViewById(R.id.histButton)
@@ -239,8 +238,7 @@ class MainActivity : AppCompatActivity() {
                 return@fetchVersionGateConfig
             }
             progressBar.visibility = View.GONE
-            versionTextView.text = "Versão $localVersionName (${localVersionCode})"
-            versionTextView.visibility = View.VISIBLE
+            appVersionLabel = "Versão $localVersionName (${localVersionCode})"
             enableAllButtons()
             checkFuelAuthorization()
         }
@@ -392,6 +390,14 @@ class MainActivity : AppCompatActivity() {
         val feedbackEditText = dialogView.findViewById<EditText>(R.id.feedbackEditText)
         val sendButton = dialogView.findViewById<Button>(R.id.sendButton)
         val cancelButton = dialogView.findViewById<Button>(R.id.cancelButton)
+        val dialogVersionTextView = dialogView.findViewById<TextView>(R.id.dialogVersionTextView)
+
+        if (appVersionLabel.isBlank()) {
+            val localVersionCode = AppVersionGatekeeper.getInstalledVersionCode(this)
+            val localVersionName = AppVersionGatekeeper.getInstalledVersionName(this)
+            appVersionLabel = "Versão $localVersionName (${localVersionCode})"
+        }
+        dialogVersionTextView.text = appVersionLabel
 
         // Cria o AlertDialog
         val alertDialog = builder.create()

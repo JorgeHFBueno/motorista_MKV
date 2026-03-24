@@ -138,15 +138,15 @@ class MainActivity : AppCompatActivity() {
                 enableAllButtons()
             }, 3000) // Reativa após 1 segundo
         }
-        /*BACKUP
+
         feedbackButton.setOnClickListener {
             disableAllButtons()
             showFeedPopup()
             feedbackButton.postDelayed({
                 enableAllButtons()
             }, 3000) // Reativa após 1 segundo
-        }*/
-
+        }
+/*BACKUP
         feedbackButton.setOnClickListener {
             disableAllButtons()
             Toast.makeText(this, "DICK ASS", Toast.LENGTH_SHORT).show()
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             feedbackButton.postDelayed({
                 enableAllButtons()
             }, 3000) // Reativa após 1 segundo
-        }
+        }*/
 
         admButton.setOnClickListener {
             disableAllButtons()

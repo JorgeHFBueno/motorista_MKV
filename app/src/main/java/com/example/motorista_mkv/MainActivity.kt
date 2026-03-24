@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.graphics.Color
 import android.Manifest
 import android.net.ConnectivityManager
 import android.os.Build
@@ -30,13 +29,13 @@ import com.bumptech.glide.Glide
 import com.example.motorista_mkv.motorista.ArrivalActivity
 import com.example.motorista_mkv.motorista.DepartureActivity
 import com.example.motorista_mkv.motorista.HistoricoActivity
-import com.google.firebase.firestore.Query
 import com.google.firebase.messaging.FirebaseMessaging
 import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import com.google.firebase.firestore.FieldValue
+import com.example.motorista_mkv.versioning.AppVersionGatekeeper
 
 class MainActivity : AppCompatActivity() {
     private companion object {
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
 
-        checkVersionAndPatch()
         if (isConnected()) {
             sendOfflineDataToFirestore()
         }
@@ -86,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         histButton = findViewById(R.id.histButton)
         feedbackButton = findViewById(R.id.feedbackButton)
         disableAllButtons()
+
+        checkVersionAndEnforceAccess()
 
         val sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val adminStatus = sharedPreferences.getString("adminStatus", "user")
@@ -209,6 +209,8 @@ class MainActivity : AppCompatActivity() {
         val adminStatus = sharedPreferences.getString("adminStatus", "user")
         Log.d("DEBUGonResumeFunc", "Admin Status: $adminStatus") // Log para depuração
 
+        // Revalida bloqueio de versão ao retornar para a MainActivity
+        checkVersionAndEnforceAccess()
         // Verificar novamente o status do admin ao retornar para a MainActivity
         checkFuelAuthorization()
         if (isConnected()) {
@@ -216,55 +218,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkVersionAndPatch() {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val adminStatus = sharedPreferences.getString("adminStatus", "user")
+    private fun checkVersionAndEnforceAccess() {
+        AppVersionGatekeeper.fetchVersionGateConfig(firestore, this) { config ->
+            val localVersionCode = AppVersionGatekeeper.getInstalledVersionCode(this)
+            val localVersionName = AppVersionGatekeeper.getInstalledVersionName(this)
 
-        firestore.collection("Versionamento")
-            .orderBy("Data", Query.Direction.DESCENDING)
-            .limit(1)
-            .get()
-            .addOnSuccessListener { documents ->
-                if (!documents.isEmpty) {
-                    val latestDocument = documents.first()
-                    val latestPatch = latestDocument.id
-                    val latestVersionStr = latestDocument.getString("Versão") ?: "0.0"
+            Log.i(
+                "VersionGate",
+                "Main check | localVersionCode=$localVersionCode | localVersionName=$localVersionName | minVersionCode=${config.minVersionCode}"
+            )
 
-                    val currentVersionStr = "1.3" // Versão atual do app
-                    val currentPatch = "Patch 1.3.0" // Patch atual do app
-
-                    // Exemplo de parse direto para Double
-                    val latestVersion = latestVersionStr.toDoubleOrNull() ?: 0.0
-                    val currentVersion = currentVersionStr.toDoubleOrNull() ?: 0.0
-
-                    Log.d("VersionCheck", "Versão no servidor: $latestVersionStr -> Convertido: $latestVersion")
-                    Log.d("VersionCheck", "Versão atual do app: $currentVersionStr -> Convertido: $currentVersion")
-
-
-                    if ( currentVersion < latestVersion ) {
-                        versionTextView.visibility = View.VISIBLE
-                        versionTextView.text = "Atualize para a versão $latestVersion"
-                        admButton.visibility = View.GONE
-                        departureButton.visibility = View.GONE
-                        arrivalButton.visibility = View.GONE
-                        fuelButton.visibility = View.GONE
-                    } else if (latestPatch != currentPatch) {
-                        if (adminStatus == "adm1" || adminStatus == "adm2"){
-                            welcomeTextView.text = " Nova Atualização Disponivel! Vesão $latestPatch"
-                            welcomeTextView.setTextColor(Color.parseColor("#FFEB3B"))
-                            welcomeTextView.setBackgroundColor(getColor(R.color.azul_escuro))
-                        }
-                        progressBar.visibility = View.GONE
-                    } else {
-                        progressBar.visibility = View.GONE
-                        enableAllButtons()
-                    }
+            if (localVersionCode < config.minVersionCode) {
+                Log.w("VersionGate", "Versão bloqueada. Encerrando fluxo da MainActivity.")
+                val blockedIntent = Intent(this, AppBlockedActivity::class.java).apply {
+                    putExtra(AppBlockedActivity.EXTRA_BLOCK_MESSAGE, config.blockedMessage)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
+                startActivity(blockedIntent)
+                finish()
+                return@fetchVersionGateConfig
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Erro ao verificar versão: ${e.message}", Toast.LENGTH_SHORT)
-                    .show()
-            }
+            progressBar.visibility = View.GONE
+            versionTextView.text = "Versão $localVersionName (${localVersionCode})"
+            versionTextView.visibility = View.VISIBLE
+            enableAllButtons()
+            checkFuelAuthorization()
+        }
     }
 
     private fun checkFuelAuthorization() {

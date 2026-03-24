@@ -14,6 +14,7 @@ import android.widget.CheckBox
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ListenerRegistration
+import com.example.motorista_mkv.versioning.AppVersionGatekeeper
 
 class LoginActivity : AppCompatActivity() {
 
@@ -46,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         if (isLoggedIn) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            validateVersionAndRoute()
+            return
         }
 
         loginButton.setOnClickListener {
@@ -76,8 +77,7 @@ class LoginActivity : AppCompatActivity() {
                                     sharedPreferences.edit()
                                         .putString("adminStatus", adminStatus)
                                         .apply()
-                                    startActivity(Intent(this, MainActivity::class.java))
-                                    finish()
+                                    validateVersionAndRoute()
                                 }
                             }else {
                                 Toast.makeText(this, "Erro ao obter usuário!", Toast.LENGTH_SHORT).show()
@@ -122,6 +122,30 @@ class LoginActivity : AppCompatActivity() {
             .addOnFailureListener {
                 callback("user")
             }
+    }
+
+    private fun validateVersionAndRoute() {
+        AppVersionGatekeeper.fetchVersionGateConfig(firestore, this) { config ->
+            val localVersionCode = AppVersionGatekeeper.getInstalledVersionCode(this)
+            val localVersionName = AppVersionGatekeeper.getInstalledVersionName(this)
+
+            Log.i(
+                "VersionGate",
+                "Login check | localVersionCode=$localVersionCode | localVersionName=$localVersionName | minVersionCode=${config.minVersionCode}"
+            )
+
+            if (localVersionCode < config.minVersionCode) {
+                val intent = Intent(this, AppBlockedActivity::class.java).apply {
+                    putExtra(AppBlockedActivity.EXTRA_BLOCK_MESSAGE, config.blockedMessage)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                finish()
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
     }
 
     override fun onDestroy() {

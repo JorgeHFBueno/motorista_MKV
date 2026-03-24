@@ -30,6 +30,10 @@
             android:name=".adm.notificacoes.ConflitoMontanteActivity"
             android:exported="false" /> <!-- INICIO -->
         <activity
+            android:name=".AppBlockedActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
